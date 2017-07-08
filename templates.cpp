@@ -1,3 +1,5 @@
+// http://www.cplusplus.com/doc/tutorial/templates/
+
 #include <cmath>
 #include <fstream>
 #include <iostream>
@@ -81,3 +83,6 @@ int main() {
     cout << "- operator: " << anInstance - 1 << endl;
     cout << (uint64_t) (int64_t) -1 << endl;
 }
+
+// Template specialization
+// skipped

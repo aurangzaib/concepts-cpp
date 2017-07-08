@@ -1,5 +1,3 @@
-#include <iostream>
-
 /*
  members      --> property and methods
  private      --> members are accessible by same and friend class
@@ -31,7 +29,22 @@
  syntax:
       instance.publicProperty;
       class::staticProperty;
+
+ syntax of a method
+
+ return_type class::method_name(params){};
+ const int someClass::someMethod(const int& a) const
+ 1st const is of return type and second const tells that method is const
+
+ whenever we provide a ctor, a default ctor must also be provided
+
+ destructor is called after eol of object, here after main()
+
+ copy assignment    --> skipped
+ move assignment    --> skipped
 */
+
+#include <iostream>
 
 using namespace std;
 struct someStruct {
@@ -69,11 +82,13 @@ public:
 
     someClass();
 
-    someClass(int, double, someStruct, const siblingClass &);
+    someClass(const someClass &);
+
+    someClass(const int &, const double &, const someStruct &, const siblingClass &);
 
     ~someClass();
 
-    void printProperty(void) const;
+    void printProperty(void); // can't be accessed by const instances
 
     bool compareFunc(const someClass &) const;
 
@@ -87,19 +102,27 @@ public:
 // static property init outside of class
 int someClass::static_property = 3;
 
+// default ctor
 someClass::someClass() {
     a = 0;
     b = 0.0;
-    c = {.x= 1, .y=1.0, .z="hello world"};
-    /* same as: c = {x:1, y:1.0, z:"Hello World"} */
+    c = {.x= 1, .y=1.0, .z="hello world"}; // c = {x:1, y:1.0, z:"Hello World"}
     d = siblingClass(12.3);
 }
 
-someClass::someClass(int a, double b, someStruct c, const siblingClass &d) : a(a), b(b), c(c), d(d) {}
+// copy ctor
+someClass::someClass(const someClass &inst) : a(inst.a), b(inst.b), c(inst.c), d(inst.d) {}
 
+// ctor
+someClass::someClass(const int &a, const double &b, const someStruct &c, const siblingClass &d) : a(a),
+                                                                                                  b(b),
+                                                                                                  c(c),
+                                                                                                  d(d) {}
+
+// dtor
 someClass::~someClass() {}
 
-void someClass::printProperty() const {
+void someClass::printProperty() {
     cout << c.x << " " << c.y << " " << c.z << endl;
     d.printProperty();
 }
@@ -141,6 +164,17 @@ int main() {
     someClass anInstance(1, 1.0, x, _x_);
     someClass secondInstance(2, 3.0, x, _x_);
     someClass thirdInstance;
+
+    const someClass fourthInstance;
+    // all properties will become read-only
+    // const instances can only access const methods
+    // fourthInstance.printProperty(); --> can't be called
+    // fourthInstance.compareFunc(secondInstance); --> can be called
+
+    // copy constructor will be called
+    someClass fifthInstance(anInstance);
+
+    // pointer to the object
     someClass *aPtr = &anInstance;
 
     // access by instance
@@ -171,3 +205,4 @@ int main() {
 
     return 0;
 }
+
