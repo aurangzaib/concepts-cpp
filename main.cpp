@@ -160,7 +160,7 @@ void a_func(int a[]) {
     cout << a[1];
 }
 
-/*
+
 int main() {
     aClass<float> anInstance(23);
     anInstance.increment(1.4);
@@ -168,50 +168,5 @@ int main() {
     anInstance.print();
     cout << "+ operator: " << anInstance + 1 << endl;
     cout << "- operator: " << anInstance - 1 << endl;
-    cout << (uint64_t)(int64_t)-1 << endl;
-}
-*/
-
-class a_class {
-private:
-    int a;
-public:
-    a_class(int a) : a(a) {}
-
-    ~a_class()() {}
-
-    void a_func();
-};
-
-void a_class::a_func() {
-    cout << "member function of a_class" << endl;
-}
-
-struct a_struct {
-    int a;
-    int b;
-    string c;
-
-    int a_func() {
-        return a;
-    }
-} a_name, b_name;
-
-struct nested_struct {
-    a_struct a;
-    int b;
-    string some_str;
-};
-
-int main() {
-    a_struct an_instance();
-    a_class some_inst(12);
-
-    a_class *a_ptr = &some_inst;
-
-    a_ptr->a_func();
-    (*a_ptr).a_func();
-
-    nested_struct a_nested_instance();
-    a_nested_instance().a.a_func();
+    cout << (uint64_t) (int64_t) -1 << endl;
 }
