@@ -1,208 +1,65 @@
 /*
- members      --> property and methods
- private      --> members are accessible by same and friend class
- protected    --> members are accessible by same, derived and friend class
- public       --> members are accessible from anywhere where instance is visible
- ::           --> scope resolution operator
+ access levels      public  protected   private
+ same class         yes     yes         yes
+ derived class      yes     yes
+ not members        yes
 
- struct has by default public
- constructor(ctor) is used to initialize properties of the class
- ctor has no return type
- in class, property can be accessed by this->prop or directly prop
+ class derived_class: public base_class     --> public remains public in derived
+ class derived_class: protected base_class  --> public remains protected in derived
+ class derived_class: private base_class    --> public remains private in derived
 
- operators:
- syntax:
- typename operator sign (:::){:::}
+ in most use cases, derived class inherits base as public
 
- operators that can be overloaded:
-    +    -    *    /    =    <    >    +=   -=   *=   /=   <<   >>
-    <<=  >>=  ==   !=   <=   >=   ++   --   %    &    ^    !    |
-    ~    &=   ^=   |=   &&   ||   %=   []   ()   ,    ->*  ->   new
+ public inheritance inherits all base parts except:
+        ctor and dtor
+        = operator
+        friends
+        private
 
- static members --> class members, can be accessed directly from class w/o creating instance
- difference b/w static and public property:
-      both can be accessed outside of class
-      public requires instance to be called
-      static can be called from class directly as well as from instance
-      static properties are once per class and shared among instances
-      public properties are separate for each instance
- syntax:
-      instance.publicProperty;
-      class::staticProperty;
-
- syntax of a method
-
- return_type class::method_name(params){};
- const int someClass::someMethod(const int& a) const
- 1st const is of return type and second const tells that method is const
-
- whenever we provide a ctor, a default ctor must also be provided
-
- destructor is called after eol of object, here after main()
-
- copy assignment    --> skipped
- move assignment    --> skipped
-*/
+  derived class uses base class ctor to initialize base class properties
+ */
 
 #include <iostream>
 
 using namespace std;
-struct someStruct {
-    int x;
-    double y;
-    string z;
-};
 
-class siblingClass {
-private:
-    double d;
+template<class T>
+class Output {
 public:
-    siblingClass() : d(10.0) {}
-
-    siblingClass(double d) : d(d) {}
-
-    inline void printProperty() const {
-        cout << "sibling class: " << d << endl;
+    inline static void print(const T &a) {
+        cout << a << endl;
     }
 };
 
-// class has by default private
-class someClass {
-private:
-    int a;
-    double b;
-    someStruct c;
-    siblingClass d;
-
+class Polygon {
+protected:
+    int width;
+    int height;
 public:
-
-    static int static_property;
-
-    const int public_property = 2;
-
-    someClass();
-
-    someClass(const someClass &);
-
-    someClass(const int &, const double &, const someStruct &, const siblingClass &);
-
-    ~someClass();
-
-    void printProperty(void); // can't be accessed by const instances
-
-    bool compareFunc(const someClass &) const;
-
-    someClass operator+(const someClass &);
-
-    someClass &operator=(const someClass &);
-
-    void operator+=(const someClass &);
+    Polygon() : width(1), height(1) {}
+    Polygon(const int &w, const int &h) : width(w), height(h) {}
 };
 
-// static property init outside of class
-int someClass::static_property = 3;
-
-// default ctor
-someClass::someClass() {
-    a = 0;
-    b = 0.0;
-    c = {.x= 1, .y=1.0, .z="hello world"}; // c = {x:1, y:1.0, z:"Hello World"}
-    d = siblingClass(12.3);
-}
-
-// copy ctor
-someClass::someClass(const someClass &inst) : a(inst.a), b(inst.b), c(inst.c), d(inst.d) {}
-
-// ctor
-someClass::someClass(const int &a, const double &b, const someStruct &c, const siblingClass &d) : a(a),
-                                                                                                  b(b),
-                                                                                                  c(c),
-                                                                                                  d(d) {}
-
-// dtor
-someClass::~someClass() {}
-
-void someClass::printProperty() {
-    cout << c.x << " " << c.y << " " << c.z << endl;
-    d.printProperty();
-}
-
-bool someClass::compareFunc(const someClass &compareInst) const {
-    string result = this->a > compareInst.a ? "greater" : "lesser";
-    cout << this->a << " is " << result << " than " << compareInst.a << endl;
-    return this->a > compareInst.a;
-}
-
-someClass someClass::operator+(const someClass &anInstance) {
-    someClass newInst;
-    newInst.a = a + anInstance.a;
-    newInst.b = b + anInstance.b;
-    newInst.c.x = c.x + anInstance.c.x;
-    newInst.c.y = c.x + anInstance.c.y;
-    return newInst;
+class Rectangle : public Polygon, public Output<int> {
+public:
+    Rectangle(const int &w, const int &h) : Polygon(w, h) {}
+    inline int area() {
+        return width * height;
+    }
 };
 
-void someClass::operator+=(const someClass &anInstance) {
-    a += anInstance.a;
-    b += anInstance.b;
-    c.x += anInstance.c.x;
-    c.y += anInstance.c.y;
+class Triangle : public Polygon, public Output<double> {
+public:
+    Triangle(const int &w, const int &h) : Polygon(w, h) {}
+    inline double area() {
+        return (1.0 / 2.0) * double(width) * double(height);
+    }
 };
-
-someClass &someClass::operator=(const someClass &anInstance) {
-    a = anInstance.a;
-    b = anInstance.b;
-    c.x = anInstance.c.x;
-    c.y = anInstance.c.y;
-    return *this;
-}
 
 int main() {
-    someStruct x = {.x=1, .y=2.0, .z="god damn it"}; // init w/o ctor
-    siblingClass _x_(2.3);
-
-    someClass anInstance(1, 1.0, x, _x_);
-    someClass secondInstance(2, 3.0, x, _x_);
-    someClass thirdInstance;
-
-    const someClass fourthInstance;
-    // all properties will become read-only
-    // const instances can only access const methods
-    // fourthInstance.printProperty(); --> can't be called
-    // fourthInstance.compareFunc(secondInstance); --> can be called
-
-    // copy constructor will be called
-    someClass fifthInstance(anInstance);
-
-    // pointer to the object
-    someClass *aPtr = &anInstance;
-
-    // access by instance
-    anInstance.printProperty();
-
-    // access by pointer
-    aPtr->printProperty();
-
-    // access by dereferenced pointer
-    (*aPtr).printProperty();
-    aPtr->compareFunc(secondInstance);
-
-    // + overloaded operator
-    thirdInstance = anInstance + secondInstance;
-    thirdInstance.printProperty();
-
-    // += overloaded operator
-    anInstance += secondInstance;
-    anInstance.printProperty();
-
-    // = overloaded operator
-    anInstance = secondInstance;
-    anInstance.printProperty();
-
-    cout << "public property: " << anInstance.public_property << endl;
-    cout << "static property from class   : " << someClass::static_property << endl;
-    cout << "static property from instance: " << anInstance.static_property << endl;
-
+    Rectangle rec(2, 3);
+    Triangle triag(4, 5);
+    Rectangle::print(rec.area());
+    Triangle::print(triag.area());
     return 0;
 }
-
