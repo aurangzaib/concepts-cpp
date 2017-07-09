@@ -1,111 +1,86 @@
 /*
+ access levels      public  protected   private
+ same class         yes     yes         yes
+ derived class      yes     yes
+ not members        yes
+
+ class derived_class: public base_class     --> public remains public in derived
+ class derived_class: protected base_class  --> public remains protected in derived
+ class derived_class: private base_class    --> public remains private in derived
+
+ in most use cases, derived class inherits base as public
+
+ public inheritance inherits all base parts except:
+        ctor and dtor
+        = operator
+        friends
+        private
+
+  derived class uses base class ctor to initialize base class properties
+
  int A::b(int c) { }    --> method b of class A with param c
  a->b                   --> a is a pointer to an instance, used to access method b
  class A: public B {};  --> A inherits B publicly
+
+ ptr to derived class is type-compatible with ptr to base class
+
+ if a ptr is of base class, it can point to methods of derived class only which are defined in base class also.
+ that's why we create virtual members in base class and define actual implementations in derived classes.
  */
 
-#include <cmath>
-#include <fstream>
 #include <iostream>
-#include <sstream>
-#include <vector>
 
 using namespace std;
 
 template<class T>
-class BadPixelInterpolator {
-private:
-    string inputPath, outputPath;
-    vector<vector<T> > matrix;
-    vector<T> neighbours;
+class Output {
 public:
-    BadPixelInterpolator() : inputPath("../csv.csv"), outputPath("../csv.csv") {}
-    BadPixelInterpolator(const string &, const string &);
-    vector<T> getNeighbours(size_t, size_t, const size_t, const size_t);
-    const T getInterpolatedPixel();
-    void debugNeighbours();
-    void readCsv();
-    void process();
-    void saveFile();
+    inline static void print(const T &a) {
+        cout << a << endl;
+    }
 };
 
 template<class T>
-BadPixelInterpolator<T>::BadPixelInterpolator(const string &i, const string &o) : inputPath(i), outputPath(o) {}
+class Polygon {
+protected:
+    T width;
+    T height;
+public:
+    Polygon() : width(1), height(1) {}
+    Polygon(const T &w, const T &h) : width(w), height(h) {}
+    virtual T area() { return 0; }
+    inline void print_public(const T &a) { cout << a << endl; }
+};
+
 template<class T>
-void BadPixelInterpolator<T>::process() {
-    // read csv file
-    readCsv();
-    // find bad pixels, neighbours and interpolated pixel value
-    const size_t n_rows = matrix.size();
-    const size_t n_cols = matrix[0].size();
-    for (size_t row = 0; row < n_rows; row++) {
-        for (size_t col = 0; col < n_cols; col++) {
-            if (matrix.at(row).at(col) == 0) {
-                neighbours = getNeighbours(row, col, n_rows, n_cols);
-                debugNeighbours();
-                matrix[row][col] = getInterpolatedPixel();
-            }
-        }
+class Rectangle : public Polygon<T>, public Output<T> {
+public:
+    Rectangle(const T &w, const T &h) : Polygon<T>(w, h) {}
+    inline T area() {
+        return this->width * this->height;
     }
-    // save csv file
-    saveFile();
-}
+};
+
 template<class T>
-void BadPixelInterpolator<T>::readCsv() {
-    ifstream input(inputPath);
-    // read line
-    for (string line; getline(input, line);) {
-        vector<T> line_array;
-        stringstream _str_(line);
-        // read space separated characters
-        for (string value; getline(_str_, value, ' ');) {
-            line_array.push_back(stoi(value));
-        }
-        matrix.push_back(line_array);
+class Triangle : public Polygon<T>, public Output<T> {
+public:
+    Triangle(const T &w, const T &h) : Polygon<T>(w, h) {}
+    inline T area() {
+        return (1.0 / 2.0) * this->width * this->height;
     }
-}
-template<class T>
-vector<T> BadPixelInterpolator<T>::getNeighbours(size_t row, size_t col, const size_t n_rows, const size_t n_cols) {
-    vector<T> neighbours;
-    // top neighbour
-    if ((row - 1) < n_rows && (row - 1) > 0)
-        neighbours.push_back(matrix[row - 1][col]);
-    // bottom neighbour
-    if ((row + 1) < n_rows && (row + 1) > 0)
-        neighbours.push_back(matrix[row + 1][col]);
-    // left neighbour
-    if (row < n_rows && (col - 1) < n_cols && (col - 1) > 0)
-        neighbours.push_back(matrix[row][col - 1]);
-    // right neighbour
-    if (row < n_rows && (col + 1) < n_cols && (col + 1) > 0)
-        neighbours.push_back(matrix[row][col + 1]);
-    return neighbours;
-}
-template<class T>
-const T BadPixelInterpolator<T>::getInterpolatedPixel() {
-    T _sum_ = 0;
-    for (const auto &v : neighbours) _sum_ += v;
-    return _sum_ / neighbours.size();
-}
-template<class T>
-void BadPixelInterpolator<T>::saveFile() {
-    ofstream _file_;
-    _file_.open(outputPath);
-    for (const auto &r : matrix) {
-        for (const auto &c : r) _file_ << c << " ";
-        _file_ << "\n";
-    }
-}
-template<class T>
-void BadPixelInterpolator<T>::debugNeighbours() {
-    cout << "neighbours: ";
-    for (const auto &n : neighbours) cout << n << " ";
-    cout << endl;
-}
+};
+
 int main() {
-    string inputPath = "../task2.csv";
-    string outputPath = "../task2-normalized.csv";
-    BadPixelInterpolator<int> interpolator(inputPath, outputPath);
-    interpolator.process();
+    Rectangle<int> rec(2, 3);
+    Triangle<double> triag(4, 9);
+    // pointers to instances
+    Polygon<int> *ptr_rec = &rec;
+    Polygon<double> *ptr_triag = &triag;
+    // static property
+    Rectangle<int>::print(rec.area());
+    Triangle<double>::print(triag.area());
+    // polymorphism
+    ptr_rec->print_public(ptr_rec->area());
+    ptr_triag->print_public(ptr_triag->area());
     return 0;
 }
