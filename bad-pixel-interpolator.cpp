@@ -14,7 +14,7 @@ private:
 public:
     BadPixelInterpolator() : inputPath("../csv.csv"), outputPath("../csv.csv") {}
     BadPixelInterpolator(const string &, const string &);
-    vector<T> getNeighbours(const size_t, const size_t, const size_t, const size_t);
+    void getNeighbours(const size_t, const size_t, const size_t, const size_t);
     const T getInterpolatedPixel();
     void debugNeighbours();
     void readCsv();
@@ -40,11 +40,11 @@ void BadPixelInterpolator<T>::process() {
             // if pixel value is 0 i.e. bad pixel
             if (matrix.at(row).at(col) == 0) {
                 // get neighbours
-                neighbours = getNeighbours(row, col, n_rows, n_cols);
-                // see pixel value of neighbours
-                debugNeighbours();
+                getNeighbours(row, col, n_rows, n_cols);
                 // get new interpolated value for bad pixel
                 matrix.at(row).at(col) = getInterpolatedPixel();
+                // see pixel value of neighbours
+                debugNeighbours();
             }
         }
     }
@@ -73,11 +73,12 @@ void BadPixelInterpolator<T>::readCsv() {
  * neighbour pixels are not always 4
  */
 template<class T>
-vector<T> BadPixelInterpolator<T>::getNeighbours(const size_t row,
-                                                 const size_t col,
-                                                 const size_t n_rows,
-                                                 const size_t n_cols) {
-    vector<T> neighbours;
+void BadPixelInterpolator<T>::getNeighbours(const size_t row,
+                                            const size_t col,
+                                            const size_t n_rows,
+                                            const size_t n_cols) {
+    // reset neighbours
+    neighbours = {};
     // top neighbour
     if ((row - 1) < n_rows && (row - 1) > 0)
         neighbours.push_back(matrix[row - 1][col]);
@@ -90,7 +91,6 @@ vector<T> BadPixelInterpolator<T>::getNeighbours(const size_t row,
     // right neighbour
     if (row < n_rows && (col + 1) < n_cols && (col + 1) > 0)
         neighbours.push_back(matrix[row][col + 1]);
-    return neighbours;
 }
 /**
  * get average value of neighbour pixels
