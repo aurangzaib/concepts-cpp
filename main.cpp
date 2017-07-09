@@ -8,7 +8,7 @@ class bad_pixel_interpolator {
 private:
     // paths
     const std::string input_path, output_path;
-    // martix and neighbours
+    // matrix and neighbours
     std::vector<std::vector<T>> matrix;
     std::vector<T> neighbours;
 public:
