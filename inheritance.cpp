@@ -60,12 +60,12 @@ protected:
 public:
     Polygon() : width(1), height(1) {}
     Polygon(const T &w, const T &h) : width(w), height(h) {}
-    // virtual function --> it makes class polymorphic class
-    virtual T virtual_area() { return 0; }
-    // pure virtual function --> it makes class abstract base class
+    // pure virtual function --> makes Polygon: abstract Polygon class
     virtual T area()=0;
-    //
-    inline void print_area() { this->area(); }
+    // polymorphic
+    // it will call area of the pointer which called it
+    // note the use of this, necessary for polymorphism
+    inline void print_area() { cout << this->area() << endl; }
 };
 
 template<class T>
@@ -99,7 +99,9 @@ int main() {
     Rectangle<int>::print(rec.area());
     Triangle<double>::print(triag.area());
     // polymorphism
+    // call area of Rectangle
     ptr_rec->print_area();
+    // call area of Triangle
     ptr_triag->print_area();
     return 0;
 }
