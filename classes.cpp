@@ -1,7 +1,7 @@
 /*
  members      --> property and methods
- private      --> members are accessible by same and friend class
- protected    --> members are accessible by same, derived and friend class
+ private      --> members are accessible by same and friend function/class
+ protected    --> members are accessible by same, derived and friend function/class
  public       --> members are accessible from anywhere where instance is visible
  ::           --> scope resolution operator
 
@@ -10,9 +10,8 @@
  ctor has no return type
  in class, property can be accessed by this->prop or directly prop
 
- operators:
- syntax:
- typename operator sign (:::){:::}
+ operators syntax:
+    typename operator sign (:::){:::}
 
  operators that can be overloaded:
     +    -    *    /    =    <    >    +=   -=   *=   /=   <<   >>
@@ -26,22 +25,27 @@
       static can be called from class directly as well as from instance
       static properties are once per class and shared among instances
       public properties are separate for each instance
+      static property is init outside of class definition
  syntax:
       instance.publicProperty;
+      instance.staticProperty;
       class::staticProperty;
 
- syntax of a method
-
- return_type class::method_name(params){};
- const int someClass::someMethod(const int& a) const
- 1st const is of return type and second const tells that method is const
+ syntax of a method:
+    const int class::method(const int& a) const{}
+    1st const --> return type
+    2nd const --> params
+    3rd const --> method can't be changed
 
  whenever we provide a ctor, a default ctor must also be provided
-
- destructor is called after eol of object, here after main()
+ destructor is called after end-of-life of object, here after main()
 
  copy assignment    --> skipped
  move assignment    --> skipped
+
+ const instances:
+    all properties will become read-only
+    const instances can only access const methods
 */
 
 #include <iostream>
@@ -139,17 +143,18 @@ int main() {
     someClass anInstance(1, 1.0, x, _x_);
     someClass secondInstance(2, 3.0, x, _x_);
     someClass thirdInstance;
+    // const instance
     const someClass fourthInstance;
-    // all properties will become read-only
-    // const instances can only access const methods
-    // fourthInstance.printProperty(); --> can't be called
-    // fourthInstance.compareFunc(secondInstance); --> can be called
 
     // copy constructor will be called
     someClass fifthInstance(anInstance);
+    // an array
+    int arr[1];
 
     // pointer to the object
     someClass *aPtr = &anInstance;
+    // pointer to the array (no &)
+    int *arrPtr = arr;
 
     // access by instance
     anInstance.printProperty();

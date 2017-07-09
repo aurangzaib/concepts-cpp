@@ -1,5 +1,3 @@
-
-
 // function in a class:
 // in cpp --> member function
 // in other languages --> method
@@ -11,33 +9,29 @@ int main() {
         int a;
         string b;
         double c;
-
         // ctor
         my_struct(int a, string b) : a(a), b(b) {}
-
         // dtor
         ~my_struct() {}
-
         // member function
         double a_func() {
             return c;
         }
     } x, y;
-
     struct nested_struct {
         my_struct nested_property;
         string some_str;
     };
-
     my_struct z;
     // x,y,z are instances of my_struct
     x.a;
     // pointer to struct
-    my_struct *ptr = &z;
+    my_struct *ptr;
+    ptr & z;
     // access property using pointer
     ptr->a;
+    // brackets are necessary
     (*ptr).a;
-    // for (*ptr).a, brackets are necessary
 
     // instance of nested structure
     nested_struct nested_inst();
