@@ -31,35 +31,38 @@ public:
     }
 };
 
+template<class T>
 class Polygon {
 protected:
-    int width;
-    int height;
+    T width;
+    T height;
 public:
     Polygon() : width(1), height(1) {}
-    Polygon(const int &w, const int &h) : width(w), height(h) {}
+    Polygon(const T &w, const T &h) : width(w), height(h) {}
 };
 
-class Rectangle : public Polygon, public Output<int> {
+template<class T>
+class Rectangle : public Polygon<T>, public Output<T> {
 public:
-    Rectangle(const int &w, const int &h) : Polygon(w, h) {}
-    inline int area() {
-        return width * height;
+    Rectangle(const T &w, const T &h) : Polygon<T>(w, h) {}
+    inline T area() {
+        return this->width * this->height;
     }
 };
 
-class Triangle : public Polygon, public Output<double> {
+template<class T>
+class Triangle : public Polygon<T>, public Output<T> {
 public:
-    Triangle(const int &w, const int &h) : Polygon(w, h) {}
-    inline double area() {
-        return (1.0 / 2.0) * double(width) * double(height);
+    Triangle(const T &w, const T &h) : Polygon<T>(w, h) {}
+    inline T area() {
+        return (1.0 / 2.0) * this->width * this->height;
     }
 };
 
 int main() {
-    Rectangle rec(2, 3);
-    Triangle triag(4, 5);
-    Rectangle::print(rec.area());
-    Triangle::print(triag.area());
+    Rectangle<int> rec(2, 3);
+    Triangle<double> triag(4, 9);
+    Rectangle<int>::print(rec.area());
+    Triangle<double>::print(triag.area());
     return 0;
 }
