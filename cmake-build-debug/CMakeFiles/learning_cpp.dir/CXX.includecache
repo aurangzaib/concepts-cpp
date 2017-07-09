@@ -7,6 +7,14 @@
 #IncludeRegexTransform: 
 
 /Users/siddiqui/Documents/Projects/cpp-concepts/main.cpp
+cmath
+-
+fstream
+-
 iostream
+-
+sstream
+-
+vector
 -
 
