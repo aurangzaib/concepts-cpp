@@ -8,7 +8,7 @@ using namespace std;
 template<class T>
 class BadPixelInterpolator {
 private:
-    string inputPath, outputPath;
+    const string inputPath, outputPath;
     vector<vector<T>> matrix;
     vector<T> neighbours;
 public:
