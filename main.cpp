@@ -3,35 +3,35 @@
 #include <sstream>
 #include <vector>
 
-using namespace std;
-
 template<class T>
-class BadPixelInterpolator {
+class bad_pixel_interpolator {
 private:
-    const string inputPath, outputPath;
-    vector<vector<T>> matrix;
-    vector<T> neighbours;
+    // paths
+    const std::string input_path, output_path;
+    // martix and neighbours
+    std::vector<std::vector<T>> matrix;
+    std::vector<T> neighbours;
 public:
-    BadPixelInterpolator() : inputPath("../csv.csv"), outputPath("../csv.csv") {}
-    BadPixelInterpolator(const string &, const string &);
-    void getNeighbours(const size_t, const size_t, const size_t, const size_t);
-    const T getInterpolatedPixel();
-    void debugNeighbours();
-    void readCsv();
+    bad_pixel_interpolator() : input_path("../csv.csv"), output_path("../csv.csv") {}
+    bad_pixel_interpolator(const std::string &, const std::string &);
+    void get_neighbours(const size_t, const size_t, const size_t, const size_t);
+    const T get_interpolated_pixel();
+    void debug_neighbours();
+    void read_csv();
     void process();
-    void saveFile();
+    void save_file();
 };
 
 template<class T>
-BadPixelInterpolator<T>::BadPixelInterpolator(const string &i, const string &o) :
-        inputPath(i), outputPath(o) {}
+bad_pixel_interpolator<T>::bad_pixel_interpolator(const std::string &i, const std::string &o) :
+        input_path(i), output_path(o) {}
 /**
  * process bad pixels
  */
 template<class T>
-void BadPixelInterpolator<T>::process() {
+void bad_pixel_interpolator<T>::process() {
     // read csv file
-    readCsv();
+    read_csv();
     // find bad pixels, neighbours and interpolated pixel value
     const size_t n_rows = matrix.size();
     const size_t n_cols = matrix.at(0).size();
@@ -40,29 +40,29 @@ void BadPixelInterpolator<T>::process() {
             // if pixel value is 0 i.e. bad pixel
             if (matrix.at(row).at(col) == 0) {
                 // get neighbours
-                getNeighbours(row, col, n_rows, n_cols);
+                get_neighbours(row, col, n_rows, n_cols);
                 // get new interpolated value for bad pixel
-                matrix.at(row).at(col) = getInterpolatedPixel();
+                matrix.at(row).at(col) = get_interpolated_pixel();
                 // see pixel value of neighbours
-                debugNeighbours();
+                debug_neighbours();
             }
         }
     }
     // save csv file
-    saveFile();
+    save_file();
 }
 /**
  * read csv file
  */
 template<class T>
-void BadPixelInterpolator<T>::readCsv() {
-    ifstream input(inputPath);
+void bad_pixel_interpolator<T>::read_csv() {
+    std::ifstream input(input_path);
     // read line
-    for (string line; getline(input, line);) {
-        vector<T> line_array;
-        stringstream _str_(line);
+    for (std::string line; getline(input, line);) {
+        std::vector<T> line_array;
+        std::stringstream _str_(line);
         // read space separated characters
-        for (string value; getline(_str_, value, ' ');) {
+        for (std::string value; getline(_str_, value, ' ');) {
             line_array.push_back(stoi(value));
         }
         matrix.push_back(line_array);
@@ -73,10 +73,10 @@ void BadPixelInterpolator<T>::readCsv() {
  * neighbour pixels are not always 4
  */
 template<class T>
-void BadPixelInterpolator<T>::getNeighbours(const size_t row,
-                                            const size_t col,
-                                            const size_t n_rows,
-                                            const size_t n_cols) {
+void bad_pixel_interpolator<T>::get_neighbours(const size_t row,
+                                               const size_t col,
+                                               const size_t n_rows,
+                                               const size_t n_cols) {
     // reset neighbours
     neighbours = {};
     // top neighbour
@@ -96,7 +96,7 @@ void BadPixelInterpolator<T>::getNeighbours(const size_t row,
  * get average value of neighbour pixels
  */
 template<class T>
-const T BadPixelInterpolator<T>::getInterpolatedPixel() {
+const T bad_pixel_interpolator<T>::get_interpolated_pixel() {
     T _sum_ = 0;
     for (const auto &v : neighbours) _sum_ += v;
     return _sum_ / neighbours.size();
@@ -105,9 +105,9 @@ const T BadPixelInterpolator<T>::getInterpolatedPixel() {
  * save matrix to disk as csv
  */
 template<class T>
-void BadPixelInterpolator<T>::saveFile() {
-    ofstream _file_;
-    _file_.open(outputPath);
+void bad_pixel_interpolator<T>::save_file() {
+    std::ofstream _file_;
+    _file_.open(output_path);
     for (const auto &r : matrix) {
         for (const auto &c : r) _file_ << c << " ";
         _file_ << "\n";
@@ -117,15 +117,15 @@ void BadPixelInterpolator<T>::saveFile() {
  * debug neighbouring pixel values
  */
 template<class T>
-void BadPixelInterpolator<T>::debugNeighbours() {
-    cout << "neighbours: ";
-    for (const auto &n : neighbours) cout << n << " ";
-    cout << endl;
+void bad_pixel_interpolator<T>::debug_neighbours() {
+    std::cout << "neighbours: ";
+    for (const auto &n : neighbours) std::cout << n << " ";
+    std::cout << std::endl;
 }
 int main() {
-    string inputPath = "../task2.csv";
-    string outputPath = "../task2-normalized.csv";
-    BadPixelInterpolator<int> interpolator(inputPath, outputPath);
+    std::string input_path = "../task2.csv";
+    std::string output_path = "../task2-normalized.csv";
+    bad_pixel_interpolator<int> interpolator(input_path, output_path);
     interpolator.process();
     return 0;
 }

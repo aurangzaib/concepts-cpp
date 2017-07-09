@@ -1,5 +1,11 @@
-// http://www.cplusplus.com/doc/tutorial/pointers/
+/*
+ http://www.cplusplus.com/doc/tutorial/pointers/
 
+
+ linked list vs vector
+ https://softwareengineering.stackexchange.com/questions/185222/what-is-the-point-of-using-lists-over-vectors-in-c
+ bjarne recommend to use std::vector over std::array or std::list
+*/
 #include <array>
 #include <vector>
 #include <string>
