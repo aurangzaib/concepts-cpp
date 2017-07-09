@@ -22,10 +22,22 @@
  a->b                   --> a is a pointer to an instance, used to access method b
  class A: public B {};  --> A inherits B publicly
 
- ptr to derived class is type-compatible with ptr to base class
+  polymorphism:
+    ptr to derived class is type-compatible with ptr to base class
+    base class ptr can point to any of the derived class instance
+    polymorphic class --> a class that declares or inherits virtual members
 
- if a ptr is of base class, it can point to methods of derived class only which are defined in base class also.
- that's why we create virtual members in base class and define actual implementations in derived classes.
+ virtual functions:
+    if a ptr is of base class, it can point to methods of derived class only which are defined in base class also.
+    that's why we create virtual members in base class and define actual implementations in derived classes.
+
+ pure virtual functions:
+    if base class is abstract, then virtual functions can be defined in base class w/o implementation
+
+ abstract base class:
+    a base class which has 1 or more pure virtual function.
+    abstract class can't instantiate objects.
+    it is used mostly to create pointers of base class pointing to derived classes -- polymorphism
  */
 
 #include <iostream>
@@ -48,8 +60,12 @@ protected:
 public:
     Polygon() : width(1), height(1) {}
     Polygon(const T &w, const T &h) : width(w), height(h) {}
-    virtual T area() { return 0; }
-    inline void print_public(const T &a) { cout << a << endl; }
+    // pure virtual function --> makes Polygon: abstract Polygon class
+    virtual T area()=0;
+    // polymorphic
+    // it will call area of the pointer which called it
+    // note the use of this, necessary for polymorphism
+    inline void print_area() { cout << this->area() << endl; }
 };
 
 template<class T>
@@ -71,16 +87,21 @@ public:
 };
 
 int main() {
+    // Rectangle instance
     Rectangle<int> rec(2, 3);
+    // Triangle instance
     Triangle<double> triag(4, 9);
-    // pointers to instances
+    // base class ptr pointing to Rectangle instance
     Polygon<int> *ptr_rec = &rec;
+    // base class ptr pointing to Triangle instance
     Polygon<double> *ptr_triag = &triag;
     // static property
     Rectangle<int>::print(rec.area());
     Triangle<double>::print(triag.area());
     // polymorphism
-    ptr_rec->print_public(ptr_rec->area());
-    ptr_triag->print_public(ptr_triag->area());
+    // call area of Rectangle
+    ptr_rec->print_area();
+    // call area of Triangle
+    ptr_triag->print_area();
     return 0;
 }

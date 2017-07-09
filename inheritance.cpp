@@ -35,7 +35,9 @@
     if base class is abstract, then virtual functions can be defined in base class w/o implementation
 
  abstract base class:
-    a base class which has 1 or more pure virtual function
+    a base class which has 1 or more pure virtual function.
+    abstract class can't instantiate objects.
+    it is used mostly to create pointers of base class pointing to derived classes -- polymorphism
  */
 
 #include <iostream>
@@ -59,10 +61,11 @@ public:
     Polygon() : width(1), height(1) {}
     Polygon(const T &w, const T &h) : width(w), height(h) {}
     // virtual function --> it makes class polymorphic class
-    virtual T area() { return 0; }
+    virtual T virtual_area() { return 0; }
     // pure virtual function --> it makes class abstract base class
-    virtual T pure_virtual_area()=0;
-    inline void print_public(const T &a) { cout << a << endl; }
+    virtual T area()=0;
+    //
+    inline void print_area() { this->area(); }
 };
 
 template<class T>
@@ -96,7 +99,7 @@ int main() {
     Rectangle<int>::print(rec.area());
     Triangle<double>::print(triag.area());
     // polymorphism
-    ptr_rec->print_public(ptr_rec->area());
-    ptr_triag->print_public(ptr_triag->area());
+    ptr_rec->print_area();
+    ptr_triag->print_area();
     return 0;
 }
