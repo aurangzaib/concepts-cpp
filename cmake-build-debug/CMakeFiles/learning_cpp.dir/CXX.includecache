@@ -7,12 +7,18 @@
 #IncludeRegexTransform: 
 
 /Users/siddiqui/Documents/Projects/cpp-concepts/main.cpp
-fstream
+cstdio
+-
+cstdlib
 -
 iostream
 -
-sstream
--
 vector
+-
+limits
+-
+stdint.h
+-
+cstring
 -
 
