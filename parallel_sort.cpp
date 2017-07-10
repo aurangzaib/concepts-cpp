@@ -2,26 +2,33 @@
 //
 // back_insertor --> http://www.cplusplus.com/reference/iterator/back_inserter/
 // back_insertor iterator is a type of output iterator
-// allows to insert element in the end of container instead of replacing the element (e.g. in std::copy)
-// using = expands the container
-
-// iterator --> http://en.cppreference.com/w/cpp/iterator/iterator
+// allows to insert element in the end of container instead of replacing...
+// ...the element (e.g. in std::copy) using = expands the container
+//
 // changes are implemented to remove the element from back of the container.
+// iterator --> http://en.cppreference.com/w/cpp/iterator/iterator
 //
-// http://www.cplusplus.com/reference/utility/pair/pair/
 // pair --> couples together a pair of values. values can be of different types -- a tuple
+// http://www.cplusplus.com/reference/utility/pair/pair/
 //
-// https://stackoverflow.com/questions/3413470/what-is-stdmove-and-when-should-it-be-used
 // std::move is used instead of std::copy
+// https://stackoverflow.com/questions/3413470/what-is-stdmove-and-when-should-it-be-used
 //
-// http://www.cprogramming.com/tutorial/typedef.html
 // typedef
+// http://www.cprogramming.com/tutorial/typedef.html
 //
-
+// using container value_type
+// https://stackoverflow.com/questions/8073052/using-a-templated-parameters-value-type
+//
 #include <algorithm>
 #include <iostream>
 #include <vector>
 
+/*
+ extend stl iterator
+ '* ++ =' operators overloaded
+ '*' operator pulls the element from back of container
+ */
 template<class T>
 class iterator : public std::iterator<std::input_iterator_tag, void, void, void, void> {
 public:
@@ -31,7 +38,13 @@ public:
     iterator() : container(0) {}
     // copy ctor
     explicit iterator(T &c) : container(&c) {}
-    // operators overloading
+    // * operator overloaded
+    // auto can be used instead of 'typename T::value_type' in C++14
+    // C++11 doesn't allow return type to be auto
+    //
+    // pop_back doesn't return value
+    // so we get the value using vector_ptr->back then use vector_ptr->pop_back
+    // https://github.com/godotengine/godot/issues/3763
     typename T::value_type operator*() {
         // get last element of vector
         auto value(container->back());
@@ -39,11 +52,16 @@ public:
         container->pop_back();
         return value;
     }
+    // = operator overloaded
     iterator &operator=(typename T::const_reference value) { return *this; }
+    // ++ operator overloaded
     iterator operator++(int) { return *this; }
 };
 
-// check if two containers are equal or not
+/*
+ * function
+ check if two containers are equal or not
+ */
 template<typename T>
 bool is_equal(const iterator<T> &a, const iterator<T> &b) {
     // either default ctor or empty container
@@ -57,9 +75,11 @@ bool is_equal(const iterator<T> &a, const iterator<T> &b) {
     }
 }
 
-// functor to sort std::pair by first element.
-// first element in our case is container2 elements
-//
+/*
+ functor
+ sort std::pair by first element.
+ first element in our case is container2 elements
+ */
 template<typename A, typename B>
 struct comparator {
     // define a type
@@ -71,6 +91,11 @@ struct comparator {
     }
 };
 
+/*
+ function
+ pair contains container1 and container2
+ un-pair the pair to get container1 and container2 separately
+ */
 template<typename A, typename B, typename Y, typename Z>
 void un_pair(std::vector<std::pair<A, B> > pair, Y container2_out, Z container1_out) {
     for (auto i = pair.begin(); i != pair.end(); ++i) {
@@ -82,20 +107,19 @@ void un_pair(std::vector<std::pair<A, B> > pair, Y container2_out, Z container1_
         container1_out++;
     }
 }
-//
-// Performs a parallel sort of the ranges [keys_first, keys_last) and
-// [values_first, values_last), preserving the ordering relation between
-// values and keys. Sends key and value output to keys_out and values_out.
-//
-// This works by building a vector of std::pairs, sorting them by the key
-// element, then returning the sorted pairs as two separate sequences.
-
+/*
+  function
+  sort the container1 and container2
+  make a pair of container2 and container1 (pair of vector) using std::pair
+  move elements from container1 and container2 to the pair
+  sort the pair based on container2 using std::sort with custom comparator functor
+ */
 template<typename A, typename B, typename C, typename X, typename Y, typename Z>
-void parallel_sort(C &container2_begin,
-                   C &container2_end,
-                   X &container1_begin,
-                   Y container2_out,
-                   Z container1_out) {
+void sort(C &container2_begin,
+          C &container2_end,
+          X &container1_begin,
+          Y container2_out,
+          Z container1_out) {
 
     // create a custom type: a vector of pairs
     typedef std::vector<std::pair<A, B> > container_pairs;
@@ -116,18 +140,21 @@ void parallel_sort(C &container2_begin,
     // separate the container1 and container2 from the pair
     un_pair(pair, container2_out, container1_out);
 }
-// debug the containers
+/*
+   function
+   debug elements of containers after sorting
+ */
 template<typename A, typename B>
 void debug_containers(const std::vector<A> &container1, const std::vector<B> &container2) {
-    for (unsigned int i = 0; i < container2.size(); ++i)
-        std::cout << container2[i] << ": "
-                  << container1[i] << std::endl;
+    for (const auto c:container2) std::cout << c << " ";
+    std::cout << std::endl;
+    for (const auto c:container1) std::cout << c << " ";
 }
 int main() {
 
     // containers
-    std::vector<std::string> container1{"zero", "three", "one", "two"};
-    std::vector<int> container2{0, 7, 1, 3};
+    std::vector<std::string> container1{"nicely", "be", "this", "arranged", "should"};
+    std::vector<int> container2{100, 3, 0, 7, 1};
 
     // input iterator begin
     iterator<std::vector<std::string> > container1_begin(container1);
@@ -136,11 +163,11 @@ int main() {
     // input iterator end
     iterator<std::vector<int> > container2_end;
     // parallel sort
-    parallel_sort<int, std::string>(container2_begin,
-                                    container2_end,
-                                    container1_begin,
-                                    std::back_inserter(container2),
-                                    std::back_inserter(container1));
+    sort<int, std::string>(container2_begin,
+                           container2_end,
+                           container1_begin,
+                           std::back_inserter(container2),
+                           std::back_inserter(container1));
 
     // debugging
     debug_containers(container1, container2);
