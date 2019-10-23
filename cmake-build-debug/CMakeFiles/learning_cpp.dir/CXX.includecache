@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -7,18 +7,12 @@
 #IncludeRegexTransform: 
 
 /Users/siddiqui/Documents/Projects/cpp-concepts/main.cpp
-cstdio
--
-cstdlib
+fstream
 -
 iostream
 -
+sstream
+-
 vector
--
-limits
--
-stdint.h
--
-cstring
 -
 

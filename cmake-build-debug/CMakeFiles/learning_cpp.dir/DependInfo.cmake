@@ -4,7 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/Users/siddiqui/Documents/Projects/cpp-concepts/bad_pixel_interpolator.cpp" "/Users/siddiqui/Documents/Projects/cpp-concepts/cmake-build-debug/CMakeFiles/learning_cpp.dir/bad_pixel_interpolator.cpp.o"
+  "/Users/siddiqui/Documents/Projects/cpp-concepts/functions.cpp" "/Users/siddiqui/Documents/Projects/cpp-concepts/cmake-build-debug/CMakeFiles/learning_cpp.dir/functions.cpp.o"
   "/Users/siddiqui/Documents/Projects/cpp-concepts/main.cpp" "/Users/siddiqui/Documents/Projects/cpp-concepts/cmake-build-debug/CMakeFiles/learning_cpp.dir/main.cpp.o"
+  "/Users/siddiqui/Documents/Projects/cpp-concepts/parallel_sort.cpp" "/Users/siddiqui/Documents/Projects/cpp-concepts/cmake-build-debug/CMakeFiles/learning_cpp.dir/parallel_sort.cpp.o"
+  "/Users/siddiqui/Documents/Projects/cpp-concepts/revise.cpp" "/Users/siddiqui/Documents/Projects/cpp-concepts/cmake-build-debug/CMakeFiles/learning_cpp.dir/revise.cpp.o"
+  "/Users/siddiqui/Documents/Projects/cpp-concepts/structures.cpp" "/Users/siddiqui/Documents/Projects/cpp-concepts/cmake-build-debug/CMakeFiles/learning_cpp.dir/structures.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

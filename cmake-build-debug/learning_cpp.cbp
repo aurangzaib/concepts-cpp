@@ -44,10 +44,11 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/8.1.0/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../lib/clang/8.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
 					<Add directory="/System/Library/Frameworks"/>
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
@@ -65,10 +66,11 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/8.1.0/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../lib/clang/8.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
 					<Add directory="/System/Library/Frameworks"/>
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
@@ -80,7 +82,22 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/siddiqui/Documents/Projects/cpp-concepts/bad_pixel_interpolator.cpp">
+			<Option target="learning_cpp"/>
+		</Unit>
+		<Unit filename="/Users/siddiqui/Documents/Projects/cpp-concepts/functions.cpp">
+			<Option target="learning_cpp"/>
+		</Unit>
 		<Unit filename="/Users/siddiqui/Documents/Projects/cpp-concepts/main.cpp">
+			<Option target="learning_cpp"/>
+		</Unit>
+		<Unit filename="/Users/siddiqui/Documents/Projects/cpp-concepts/parallel_sort.cpp">
+			<Option target="learning_cpp"/>
+		</Unit>
+		<Unit filename="/Users/siddiqui/Documents/Projects/cpp-concepts/revise.cpp">
+			<Option target="learning_cpp"/>
+		</Unit>
+		<Unit filename="/Users/siddiqui/Documents/Projects/cpp-concepts/structures.cpp">
 			<Option target="learning_cpp"/>
 		</Unit>
 		<Unit filename="/Users/siddiqui/Documents/Projects/cpp-concepts/CMakeLists.txt">
