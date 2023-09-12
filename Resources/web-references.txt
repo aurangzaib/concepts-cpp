@@ -1,0 +1,7 @@
+
+Learning Resources:
+https://learn.microsoft.com/en-us/cpp/cpp/user-defined-literals-cpp
+
+Define number in a constant
+https://learn.microsoft.com/en-us/cpp/cpp/numeric-boolean-and-pointer-literals-cpp?view=msvc-170#avoid-using-literals-as-magic-constants
+
