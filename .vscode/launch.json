@@ -1,7 +1,8 @@
 {
     "configurations": [
+
         {
-            "name": "C/C++: g++ build and debug active file",
+            "name": "C++ Debugger",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
