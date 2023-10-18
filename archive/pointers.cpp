@@ -47,34 +47,10 @@ int main() {
 
     // int **a_ptr_ptr = &aa --> wrong
 
-    // arrays:
-    int some_array[10];
-    int some_array2[] = {1, 2, 3, 4, 5};
-
-    // function and array
-    some_function(some_array);
-    void some_function(int an_array[]) {
-        cout << an_array[2];
-    }
-
-    // always prefer stl array over c array
-    // still better, vector can be used which has dynamic size
-    array<int, 4> my_array{1, 2, 3, 4};
-    my_array.size();
-    vector<int> my_vector{1, 2, 3, 4};
-    cout << my_vector.size();
-    // always use .at() to access element, it has boundary checks
-
-    // arrays and pointers
     // arrays and ptr are similar in operation
     // ptr can point to new variable, array can't
 
     int an_array[] = {1, 2, 3};
-    cout << an_array // a/d of 0th element
-         << *an_array // value of 0th element
-         << *(an_array + 1) // value of 1st element
-         << &an_array[2] // a/d of 2nd element
-         << (an_array + 2);
 
     // note: there is no & needed for array
     int *ptr = an_array;
