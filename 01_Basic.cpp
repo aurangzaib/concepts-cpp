@@ -7,14 +7,17 @@
 // ================================================================
 // General
 // ================================================================
-// sizeof (var): To get size of a variable
-// Precedence:   BODMAS (Bracket Order Divide Multiply Add Subtract)
+
+// sizeof (var):        To get size of a variable
+// Precedence:          BODMAS (Bracket Order Divide Multiply Add Subtract)
+// Static storage:      Global variables (default initialized to 0)
+// Automatic storage:   Local variables  (default initialized to random number)
 
 // ================================================================
 // Initialization
 // ================================================================
 
-int a0=1;    // C initialization
+int a0 = 1;  // C initialization
 int b0(2);   // Constructor initialization
 int c0{3};   // Uniform initialization
 
@@ -64,18 +67,16 @@ int c = 33;
 // Alias namespace
 namespace SN = some_namespace;
 
+// Python module = C++ namespace
+
 // ================================================================
 // Important Libraries
 // ================================================================
 
 // iostream
 // string
-//
 
-// ================================================================
-// Main
-// ================================================================
-
+//----------------------------------------------------------------
 int main() {
   // Namespace
   int a = 3;
