@@ -14,7 +14,7 @@
 // Initialization
 // ================================================================
 
-int a0 = 1;  // C initialization
+int a0=1;    // C initialization
 int b0(2);   // Constructor initialization
 int c0{3};   // Uniform initialization
 
