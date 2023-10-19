@@ -24,7 +24,8 @@ void my_func(array<T, N> arr);
 template<typename T>
 void my_func(vector<T> vec);
 
-void my_func(int *ptr_arr);
+template<typename T>
+void my_func(T *ptr_arr);
 
 //------------------------------------------------------------------
 int main() {
@@ -128,4 +129,5 @@ void my_func(array<T, N> arr) { cout << arr.at(0) << endl; }
 template<typename T>
 void my_func(vector<T> vec)   { cout << vec.at(0) << endl; }
 
-void my_func(int *ptr_arr)    { cout << ptr_arr[0] << endl; }
+template<typename T>
+void my_func(T *ptr_arr)      { cout << ptr_arr[0] << endl; }

@@ -12,8 +12,8 @@ int main() {
   // General
   // ================================================================
   // Pointer: A variable to store address of another variable
-  // * --> dereference operator
-  // & --> reference operator
+  // * --> dereference operator (value)
+  // & --> reference operator   (address)
 
   // ================================================================
   // Initialization
@@ -35,7 +35,7 @@ int main() {
   // -------------- array
   arr.begin();
   ptr_arr;
-  // -------------- array
+  // -------------- c array
   &arr_c;
   arr_c + 0;
   ptr_arr_c;
@@ -50,7 +50,7 @@ int main() {
   arr.at(1);
   ptr_arr[1];
   *(ptr_arr + 1);
-  // -------------- array
+  // -------------- c array
   arr_c[1];
   ptr_arr_c[1];
   *(ptr_arr_c + 1);
@@ -80,12 +80,11 @@ int main() {
   // ================================================================
   // Array and pointer
   // ================================================================
-  // arrays and ptr are similar in operation
+  // array and ptr are similar in operation
   // ptr can point to new variable, array can't
   *ptr_arr++;         // get value of array element, increment address
   *++ptr_arr;         // increment address, get value of array element
   ++*ptr_arr;         // same as above
-
 
   return 0;
 }
