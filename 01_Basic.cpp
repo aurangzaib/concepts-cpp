@@ -2,7 +2,13 @@
 #include <iostream>
 #include <string>
 
-/* For best results, use Courier New fonts */
+// ================================================================
+// Fonts
+// ================================================================
+
+// Courier New
+// Source Code Pro
+// Fira Code
 
 // ================================================================
 // General
@@ -12,14 +18,15 @@
 // Precedence:          BODMAS (Bracket Order Divide Multiply Add Subtract)
 // Static storage:      Global variables (default initialized to 0)
 // Automatic storage:   Local variables  (default initialized to random number)
+// C++ namespace:       Python module:
 
 // ================================================================
 // Initialization
 // ================================================================
 
-int a0 = 1;  // C initialization
-int b0(2);   // Constructor initialization
-int c0{3};   // Uniform initialization
+int a0 = 1;     // C initialization
+int b0(2);      // Constructor initialization
+int c0{3};      // Uniform initialization
 
 // ================================================================
 // Datatype
@@ -34,7 +41,7 @@ int c0{3};   // Uniform initialization
 // double       8 byte
 // long double  8 byte
 // long long    8 byte
-// auto         Only on declaration. Not for function argument/return type
+// auto         Only on declaration. Not for function param / return type
 
 // ================================================================
 // Abbreviatins
@@ -45,8 +52,8 @@ int c0{3};   // Uniform initialization
 // GNU          GNU Is Not Unix
 // GCC          GNU Compiler Collection
 // Binary       Machine Code / Object Code (*.o)
-// Compile      C++ to machine code (object code)
 // Linking      Link multiple C++ files to generate one machine code
+// Compile      C++ to machine code (object code)
 // Loading      Load machine code into memory
 
 // ================================================================
@@ -59,7 +66,7 @@ int a = 0;
 namespace some_namespace {
 int a = 1;
 int b = 2;
-}  // namespace some_namespace
+}
 // Anonymous namespace
 namespace {
 int c = 33;
@@ -67,26 +74,22 @@ int c = 33;
 // Alias namespace
 namespace SN = some_namespace;
 
-// Python module = C++ namespace
-
-// ================================================================
-// Important Libraries
-// ================================================================
-
-// iostream
-// string
-
 //----------------------------------------------------------------
 int main() {
   // Namespace
   int a = 3;
-  std::cout << ::a;
-  std::cout << some_namespace::a;
-  std::cout << SN::b;
-  std::cout << a;
-  std::cout << c;
+  std::cout << ::a;                // global
+  std::cout << some_namespace::a;  // namespace
+  std::cout << SN::b;              // namespace
+  std::cout << a;                  // local
+  std::cout << c;                  // nameless namespace
 
-  std::string as = "where are your";
-  std::cout << as << std::endl;
+  // ================================================================
+  // Post and pre increment/decrement
+  // ================================================================
+  int c = 0;
+  c++;  // get value, then increment for next time
+  ++c;  // increment, then get incremented value
+
   return 0;
 }

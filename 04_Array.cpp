@@ -79,16 +79,6 @@ int main() {
   // check if all removed
   vec.empty();
 
-  // ================================================================
-  // C Array and Pointer
-  // ================================================================
-
-  arr_c[0];     // Value of first element
-  *arr_c;       // Value of first element
-  *(arr_c + 1); // Value of second element
-  (arr_c + 1);  // Address of second element
-  &arr_c[1];    // Address of second element
-
   return 0;
 
 }

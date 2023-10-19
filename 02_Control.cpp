@@ -12,7 +12,6 @@ using namespace std;
 // >=
 // !=
 
-
 //----------------------------------------------------------------
 int main() {
   int max_count = 10;
@@ -28,7 +27,7 @@ int main() {
   } else {
   }
 
-  // binray operator
+  // binary operator
   (max_count < 10) && (arr_count[0] = 1);
 
   // ternary operator
@@ -39,7 +38,7 @@ int main() {
     case 0:
       cout << 0;
       break;
-    case 1:
+    case 1: case 2:
       cout << 1;
       break;
     default:
@@ -48,7 +47,7 @@ int main() {
   }
 
   // ================================================================
-  // Iteration
+  // Iterators
   // ================================================================
 
   // for loop
@@ -58,7 +57,17 @@ int main() {
 
   // for range
   for (auto iterator : arr_count) {
-    cout << iterator;
+      cout << "Iterator value: " << iterator;
+  }
+
+  // for range (const): Preferred for read
+  for (const auto &iterator : arr_count) {
+    cout << "Iterator value: " << iterator;
+  }
+
+  // for range (reference): Preferred for write
+  for (auto &iterator : arr_count) {
+    iterator = 1;
   }
 
   // while loop

@@ -1,7 +1,6 @@
 /*
  http://www.cplusplus.com/doc/tutorial/pointers/
 
-
  linked list vs vector
  https://softwareengineering.stackexchange.com/questions/185222/what-is-the-point-of-using-lists-over-vectors-in-c
  bjarne recommend to use std::vector over std::array or std::list
@@ -15,72 +14,6 @@ int main() {
     // strings
     string a_string = "hello"; // static compile time size
     char a_string_2[] = "hello"; // dynamic runtime size
-
-    // pointer --> variable which stores a/d of another variable
-
-    // dereference operator --> *
-    // reference operator --> &
-
-    int aa = 33;
-
-    // case-1: pointer
-    int *a_ptr = &aa;   // another way --> int *a_ptr; a_ptr = &aa;
-    cout << &aa         // address of a
-         << a_ptr       // address of a
-         << aa          // value of a
-         << *a_ptr      // value of a
-         << &a_ptr;     // address of a_ptr
-    *a_ptr = 3; // --> update value of aa from 33 to 3
-
-    // case-2: pointer to a pointer
-    // a_ptr and a_ptr_to_ptr both points to a
-    int *a_ptr_to_ptr = a_ptr;
-
-    // case-3: double pointer
-    // a_ptr points to a
-    // a_ptr_ptr points to a_ptr
-    int **a_ptr_ptr = &a_ptr;
-    cout << &a_ptr_ptr  // address of a_ptr_ptr
-         << a_ptr_ptr   // address of a_ptr
-         << *a_ptr_ptr  // address of aa
-         << **a_ptr_ptr;// value of a
-
-    // int **a_ptr_ptr = &aa --> wrong
-
-    // arrays and ptr are similar in operation
-    // ptr can point to new variable, array can't
-
-    int an_array[] = {1, 2, 3};
-
-    // note: there is no & needed for array
-    int *ptr = an_array;
-    // cases of ptr and increment
-    *ptr++; // increment a/d, dereference un-incremented
-    *++ptr; // increment a/d, dereference incremented
-    ++*ptr; // dereference, increment a/d
-    (*ptr)++;// same as *ptr++
-
-    // case -- 1:
-    *p++ = *q++;
-    // above statement means:
-    *p = *q;
-    ++q;
-    ++p;
-
-    // case -- 2:
-    *p++ = *++q;
-    // above statement means:
-    ++q;
-    *p = *q;
-    ++p;
-
-    // case -- 2:
-    *++p = *++q;
-    // above statement means:
-    ++q;
-    ++p;
-    *p = *q;
-
     // pointer and const
     int some_var;
     // non-const ptr, non-const var
