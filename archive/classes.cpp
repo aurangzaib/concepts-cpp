@@ -1,42 +1,7 @@
 /*
- members      --> property and methods
- private      --> members are accessible by same and friend function/class
- protected    --> members are accessible by same, derived and friend
- function/class public       --> members are accessible from anywhere where
- instance is visible
- ::           --> scope resolution operator
-
- struct has by default public
- constructor(ctor) is used to initialize properties of the class
- ctor has no return type
- in class, property can be accessed by this->prop or directly prop
-
  operators syntax:
     typename operator sign (:::){:::}
 
- operators that can be overloaded:
-    +    -    *    /    =    <    >    +=   -=   *=   /=   <<   >>
-    <<=  >>=  ==   !=   <=   >=   ++   --   %    &    ^    !    |
-    ~    &=   ^=   |=   &&   ||   %=   []   ()   ,    ->*  ->   new
-
- static members --> class members, can be accessed directly from class w/o
- creating instance difference b/w static and public property: both can be
- accessed outside of class public requires instance to be called static can be
- called from class directly as well as from instance static properties are once
- per class and shared among instances public properties are separate for each
- instance static property is init outside of class definition syntax:
-      instance.publicProperty;
-      instance.staticProperty;
-      class::staticProperty;
-
- syntax of a method:
-    const int class::method(const int& a) const{}
-    1st const --> return type
-    2nd const --> params
-    3rd const --> method can't be changed
-
- whenever we provide a ctor, a default ctor must also be provided
- destructor is called after end-of-life of object, here after main()
 
  copy assignment    --> skipped
  move assignment    --> skipped

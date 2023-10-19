@@ -7,7 +7,7 @@ using namespace std;
 // Recursive Factorial: https://stackoverflow.com/a/20108832
 
 // ================================================================
-// General
+// Notes
 // ================================================================
 
 // Functions are not first class citizen (can't be passed, can't be returned)
@@ -54,11 +54,9 @@ inline auto my_function5(const int &a, const int &b) { return a + b; }
 // Function overloading
 // ================================================================
 
-int multiplier(int input1=1, int input2=1) {
+int multiplier(int input1 = 1, int input2 = 1) { return input1 * input2; }
+double multiplier(double input1 = 1.0, double input2 = 1.0) {
     return input1 * input2;
-}
-double multiplier(double input1=1.0, double input2=1.0) {
-  return input1 * input2;
 }
 
 // ================================================================
@@ -68,12 +66,12 @@ double multiplier(double input1=1.0, double input2=1.0) {
 // Factorial without recursion:
 // n! = n*(n-1)*(n-2)*(n-3)...*(n-n+2)*(n-n+1)
 long factorial_without_recursion(long num) {
-  if (num < 0)  return NULL;     // Handle negative numbers
-  if (num <= 1) return 1;        // Handle <=1 numbers (0, 1)
-  for (auto loop = num - 1; loop > 1; loop -= 1) {
-    num *= loop;
-  }
-  return num;
+    if (num < 0) return NULL;  // Handle negative numbers
+    if (num <= 1) return 1;    // Handle <=1 numbers (0, 1)
+    for (auto loop = num - 1; loop > 1; loop -= 1) {
+        num *= loop;
+    }
+    return num;
 }
 
 // Factorial with recursion:
@@ -82,14 +80,15 @@ long factorial_without_recursion(long num) {
 // factorial(num) = num * factorial(num - 1)
 // Why 0! = 1: 0 can be arranged only 1 way
 long factorial_with_recursion(const long &num) {
-  if (num < 0)  return NULL;                       // Handle negative numbers
-  if (num <= 1) return 1;                          // Handle <=1 numbers (0, 1)
-  return num * factorial_with_recursion(num - 1);  // Handle > 1 numbers (2,..)
+    if (num < 0) return NULL;  // Handle negative numbers
+    if (num <= 1) return 1;    // Handle <=1 numbers (0, 1)
+    return num *
+           factorial_with_recursion(num - 1);  // Handle > 1 numbers (2,..)
 }
 
 //----------------------------------------------------------------
 int main() {
-  const long num = 5;
-  auto combinations = factorial_with_recursion(num);
-  return 0;
+    const long num = 5;
+    auto combinations = factorial_with_recursion(num);
+    return 0;
 }

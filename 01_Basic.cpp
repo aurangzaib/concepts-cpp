@@ -11,7 +11,7 @@
 // Fira Code
 
 // ================================================================
-// General
+// Notes
 // ================================================================
 
 // sizeof (var):        To get size of a variable
@@ -24,9 +24,9 @@
 // Initialization
 // ================================================================
 
-int a0 = 1;     // C initialization
-int b0(2);      // Constructor initialization
-int c0{3};      // Uniform initialization
+int a0 = 1;  // C initialization
+int b0(2);   // Constructor initialization
+int c0{3};   // Uniform initialization
 
 // ================================================================
 // Datatype
@@ -66,7 +66,7 @@ int a = 0;
 namespace some_namespace {
 int a = 1;
 int b = 2;
-}
+}  // namespace some_namespace
 // Anonymous namespace
 namespace {
 int c = 33;
@@ -76,20 +76,20 @@ namespace SN = some_namespace;
 
 //----------------------------------------------------------------
 int main() {
-  // Namespace
-  int a = 3;
-  std::cout << ::a;                // global
-  std::cout << some_namespace::a;  // namespace
-  std::cout << SN::b;              // namespace
-  std::cout << a;                  // local
-  std::cout << c;                  // nameless namespace
+    // Namespace
+    int a = 3;
+    std::cout << ::a;                // global
+    std::cout << some_namespace::a;  // namespace
+    std::cout << SN::b;              // namespace
+    std::cout << a;                  // local
+    std::cout << c;                  // nameless namespace
 
-  // ================================================================
-  // Post and pre increment/decrement
-  // ================================================================
-  int c = 0;
-  c++;  // get value, then increment for next time
-  ++c;  // increment, then get incremented value
+    // ================================================================
+    // Post and pre increment/decrement
+    // ================================================================
+    int c = 0;
+    c++;  // get value, then increment for next time
+    ++c;  // increment, then get incremented value
 
-  return 0;
+    return 0;
 }
