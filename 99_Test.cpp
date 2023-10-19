@@ -35,4 +35,11 @@ int main(){
     func_vec(vec);
     func_arr(arr);
     func_arr(arr.begin());
+
+    int my_var          = 123;
+    int *ptr            = &my_var; // nonconst a/d, nonconst val
+    const int *ptr      = &my_var; // nonconst a/d, const val
+    int *const ptr      = &my_var; // const a/d, const val
+    const int *const ptr= &my_var; // const a/d, const val
+
 }

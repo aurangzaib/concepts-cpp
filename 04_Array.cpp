@@ -10,6 +10,7 @@ using namespace std;
 // ================================================================
 // https://en.cppreference.com/w/cpp/container/array
 // https://en.cppreference.com/w/cpp/container/vector
+// https://softwareengineering.stackexchange.com/questions/185222/what-is-the-point-of-using-lists-over-vectors-in-c
 
 // ================================================================
 // Declaration
