@@ -2,6 +2,11 @@
 using namespace std;
 
 // ================================================================
+// Link
+// ================================================================
+// Recursive Factorial: https://stackoverflow.com/a/20108832
+
+// ================================================================
 // General
 // ================================================================
 
@@ -57,9 +62,10 @@ double multiplier(double input1=1.0, double input2=1.0) {
 }
 
 // ================================================================
-// Factorial without recursion
+// Recursion
 // ================================================================
 
+// Factorial without recursion:
 // n! = n*(n-1)*(n-2)*(n-3)...*(n-n+2)*(n-n+1)
 long factorial_without_recursion(long num) {
   if (num < 0)  return NULL;     // Handle negative numbers
@@ -70,16 +76,11 @@ long factorial_without_recursion(long num) {
   return num;
 }
 
-// ================================================================
-// Factorial with recursion
-// ================================================================
-
-// Algorithm (https://stackoverflow.com/a/20108832):
-//      Factorial: Number of combinations/arrangements
-//      5! = 5 * 4!
-//      factorial(num) = num * factorial(num - 1)
-// Why 0! = 1?
-//      0 can be arranged only 1 way
+// Factorial with recursion:
+// Factorial: Number of combinations/arrangements
+// 5! = 5 * 4!
+// factorial(num) = num * factorial(num - 1)
+// Why 0! = 1: 0 can be arranged only 1 way
 long factorial_with_recursion(const long &num) {
   if (num < 0)  return NULL;                       // Handle negative numbers
   if (num <= 1) return 1;                          // Handle <=1 numbers (0, 1)
