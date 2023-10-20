@@ -144,6 +144,6 @@ void my_func(vector<T> vec) {
 }
 
 template <typename T>
-void my_func(T *ptr_arr) {
+void my_func2(T *ptr_arr) {
     cout << ptr_arr[0] << endl;
 }

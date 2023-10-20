@@ -17,12 +17,12 @@ using namespace std;
 // Unique pointer (C++ Pointer)
 // ==========================================================================================================
 void unique_pointer() {
-  // RAII: Resource Acquisition is Initialization
-  // It has automatic deletion
-  int var = 123;
-  unique_ptr<int> ptr(new int{var});
-  cout << *ptr << endl;
-  cout << ptr << endl;
+    // RAII: Resource Acquisition is Initialization
+    // It has automatic deletion
+    int var = 123;
+    unique_ptr<int> ptr(new int{var});
+    cout << *ptr << endl;
+    cout << ptr << endl;
 }
 
 // ==========================================================================================================
@@ -35,6 +35,6 @@ void unique_pointer() {
 
 //----------------------------------------------------------------------------------------------------------------
 int main() {
-  unique_pointer();
-  return 0;
+    unique_pointer();
+    return 0;
 }
