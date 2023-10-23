@@ -62,15 +62,18 @@ int c0{3};   // Uniform initialization
 
 // Global namespace
 int a = 0;
+
 // Custom namespace
 namespace some_namespace {
 int a = 1;
 int b = 2;
-}  // namespace some_namespace
+}
+
 // Anonymous namespace
 namespace {
 int c = 33;
 }
+
 // Alias namespace
 namespace SN = some_namespace;
 

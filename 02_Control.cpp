@@ -1,4 +1,6 @@
 #include <iostream>
+#include <array>
+#include <vector>
 using namespace std;
 
 // ==========================================================================================================
@@ -51,22 +53,22 @@ int main() {
     // Iterators
     // ==========================================================================================================
 
-    // for loop
+    // For loop
     for (auto counter = 0; counter < max_count; counter += 1) {
         cout << counter;
     }
-
-    // for range
+    
+    // For range
     for (auto iterator : arr_count) {
         cout << "Iterator value: " << iterator;
     }
 
-    // for range (const): Preferred for read
+    // For range (const): Preferred for read
     for (const auto &iterator : arr_count) {
         cout << "Iterator value: " << iterator;
     }
 
-    // for range (reference): Preferred for write
+    // For range (reference): Preferred for write
     for (auto &iterator : arr_count) {
         iterator = 1;
     }
@@ -77,8 +79,8 @@ int main() {
         counter += 1;
     }
 
-    // break:       Exit the loop
     // continue:    Skip iteration
+    // break:       Exit the loop
 
     return 0;
 }

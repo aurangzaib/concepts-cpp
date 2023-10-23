@@ -1,15 +1,15 @@
 #include <iostream>
 #include <vector>
 #include <array>
+#include <tuple>
+#include <list>
 
 using namespace std;
-void func_abc(const vector<int> &vec, const string str) {
-    // element
-    cout << vec.at(1) << endl;
-    cout << str << endl;
-}
 
 int main() {
-    int arr[] = {1, 2, 3, 4};
-    func_abc((vector<int>){1, 2, 3, 4}, "Hello World");
+    vector<int> vec = {1, 2, 3};
+    tuple<int, double, string> tpl = {3, 6.3, "hello"};
+    cout << std::get<2>(tpl);
+    cout << std::tuple_size<decltype(tpl)>::value;
+
 }

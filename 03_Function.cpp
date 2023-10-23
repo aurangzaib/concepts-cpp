@@ -11,13 +11,13 @@ using namespace std;
 // ==========================================================================================================
 
 // Functions are not first class citizen (can't be passed, can't be returned)
-// Function overloading is not available in *Python* due to dynamic types
-// Function for mutlitple param types can be implemented using Templates
+// Function for mutltiple param types can be implemented using templates
+// Function overloading is not available in python due to dynamic types
 // Lambdas are first class citizen
 
 // ==========================================================================================================
 // Parameter passed by value
-// =========================================================Ç=================================================
+// ==========================================================================================================
 
 auto my_function1(int a, int b) {
     return a + b;
