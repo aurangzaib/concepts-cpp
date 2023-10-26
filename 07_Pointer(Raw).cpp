@@ -3,10 +3,11 @@
 
 using namespace std;
 
-// ==========================================================================================================
-// Raw pointer
-// ==========================================================================================================
 void raw_pointer() {
+
+    // ==========================================================================================================
+    // Main topics
+    // ==========================================================================================================
 
     // ---------------------------------------------------------------
     // General
@@ -40,7 +41,7 @@ void raw_pointer() {
     int             *arrc_ptr  = arrc; // Pointer to c-array 
 
     // ---------------------------------------------------------------
-    // Value of Variable
+    // Value
     // ---------------------------------------------------------------
     cout << var                 << endl; // Variable     
     cout << *var_ptr            << endl;           
@@ -51,7 +52,7 @@ void raw_pointer() {
     cout << *(arrc_ptr + 0)     << endl;
 
     // ---------------------------------------------------------------
-    // Address of Variable
+    // Address
     // ---------------------------------------------------------------
     cout << &var                << endl; // Variable
     cout << var_ptr             << endl;
@@ -61,11 +62,12 @@ void raw_pointer() {
     cout << arr_ptr->begin()    << endl;
     cout << (*arr_ptr).begin()  << endl;
     cout << arr_ptr             << endl;
-    cout << &arrc               << endl; // C-array
+    cout << arrc                << endl; // C-array
+    cout << &arrc[0]            << endl;
     cout << arrc_ptr            << endl;
 
     // ---------------------------------------------------------------
-    // Address of pointer
+    // Address (pointer)
     // ---------------------------------------------------------------
     cout << &var_ptr            << endl;
     cout << &arr_ptr            << endl;
@@ -78,6 +80,32 @@ void raw_pointer() {
     cout << var             << endl;
     cout << *var_ptr        << endl;
     cout << **var_ptr_ptr   << endl;
+
+    // ---------------------------------------------------------------
+    // Void pointer
+    // ---------------------------------------------------------------
+
+    // Void pointer points to a data which has no type
+    // Void pointer can not be deferenced
+    // It can be used as a placeholder when datatype of structure is not known
+    void *void_ptr;
+
+    // ---------------------------------------------------------------
+    // Null pointer
+    // ---------------------------------------------------------------
+
+    // Null pointer points to a data which has no address
+    int *ptr_null_1;
+    int *ptr_null_2 = nullptr;
+    int *ptr_null_3 = NULL;
+
+    // ---------------------------------------------------------------
+    // Volatile pointer
+    // ---------------------------------------------------------------
+
+    // ==========================================================================================================
+    // Extra topics
+    // ==========================================================================================================
 
     // ----------------------------------------------------------------
     // Non const address. Non const value
@@ -111,27 +139,6 @@ void raw_pointer() {
     // Pointer cant change structure value
     const int *const ptr4 = &var_a;
 
-    // ---------------------------------------------------------------
-    // Volatile pointer
-    // ---------------------------------------------------------------
-
-    // ---------------------------------------------------------------
-    // Void pointer
-    // ---------------------------------------------------------------
-
-    // Void pointer points to a data which has no type
-    // Void pointer can not be deferenced
-    // It can be used as a placeholder when datatype of structure is not known
-    void *void_ptr;
-
-    // ---------------------------------------------------------------
-    // Null pointer
-    // ---------------------------------------------------------------
-
-    // Null pointer points to a data which has no address
-    int *ptr_null_1;
-    int *ptr_null_2 = nullptr;
-    int *ptr_null_3 = NULL;
 }
 
 //---------------------------------------------------------------------------------------------------------------
