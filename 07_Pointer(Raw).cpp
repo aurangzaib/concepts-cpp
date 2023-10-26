@@ -1,6 +1,4 @@
 #include <iostream>
-#include <string>
-#include <vector>
 #include <array>
 
 using namespace std;
@@ -20,71 +18,66 @@ void raw_pointer() {
     // - & --> reference operator   (address)
     // - * --> dereference operator (value)
     // - Difference between pointer-to-variable and pointer-to-class:
-    //   - Access variable value:       *ptr
-    //   - Access class property value : ptr->property
-    // C-array and Pointer are similar in operation
-    // Pointer can point to new variable, C-array can't
+    //   -- Access variable value:       *ptr
+    //   -- Access class property value : ptr->property
+    // - C-array and Pointer are similar in operation
+    // - Pointer can point to new variable, C-array can't
+    // - Variable and C-Array pointers have same access syntax
+    // - Variable and class pointers have same declaration syntax 
 
     // ---------------------------------------------------------------
-    // Initialization
+    // Declaration
     // ---------------------------------------------------------------
-    int var             = 3;
-    array<int, 4> arr   = {1, 2, 3, 4};
+    int var            = 3;
+    array<int, 4> arr  = {1, 2, 3, 4};
+    int arrc[]         = {1, 2, 3, 4};
 
     // ---------------------------------------------------------------
     // Pointer
     // ---------------------------------------------------------------
-    int             *var_ptr   = &var; // pointer to a variable
-    array<int, 4>   *arr_ptr   = &arr; // pointer to a class
+    int             *var_ptr   = &var; // Pointer to a variable
+    array<int, 4>   *arr_ptr   = &arr; // Pointer to a class
+    int             *arrc_ptr  = arrc; // Pointer to c-array 
 
     // ---------------------------------------------------------------
     // Value of Variable
     // ---------------------------------------------------------------
-    cout << var                 << endl;           
+    cout << var                 << endl; // Variable     
     cout << *var_ptr            << endl;           
-    cout << arr.at(0)           << endl;
+    cout << arr.at(0)           << endl; // Class
     cout << arr_ptr->at(0)      << endl;
     cout << (*arr_ptr).at(0)    << endl;
+    cout << arrc[0]             << endl; // C-array
+    cout << *(arrc_ptr + 0)     << endl;
 
     // ---------------------------------------------------------------
     // Address of Variable
     // ---------------------------------------------------------------
-    cout << &var                << endl;
+    cout << &var                << endl; // Variable
     cout << var_ptr             << endl;
-    cout << &arr                << endl;
+    cout << &arr                << endl; // Class
     cout << &arr.at(0)          << endl;
     cout << arr.begin()         << endl;
     cout << arr_ptr->begin()    << endl;
     cout << (*arr_ptr).begin()  << endl;
     cout << arr_ptr             << endl;
+    cout << &arrc               << endl; // C-array
+    cout << arrc_ptr            << endl;
 
     // ---------------------------------------------------------------
     // Address of pointer
     // ---------------------------------------------------------------
     cout << &var_ptr            << endl;
     cout << &arr_ptr            << endl;
-
-    // ---------------------------------------------------------------
-    // Pointer of pointer
-    // ---------------------------------------------------------------
-    int *ptr_ptr = var_ptr;
-    cout << ptr_ptr             << endl; // address of var
-    cout << *ptr_ptr            << endl; // value of var
+    cout << &arrc_ptr           << endl;
 
     // ---------------------------------------------------------------
     // Double pointer
     // ---------------------------------------------------------------
-    int **double_ptr = &var_ptr;
-    cout << double_ptr            << endl; // address of var_ptr
-    cout << *double_ptr           << endl; // address of var
-    cout << **double_ptr          << endl; // value of var
-
-    // ---------------------------------------------------------------
-    // Array and pointer
-    // ---------------------------------------------------------------
-    // *arr_ptr++            << endl;  // get value of array element, increment address
-    // *++arr_ptr            << endl;  // increment address, get value of array element
-    // ++*arr_ptr            << endl;  // same as above
+    int **var_ptr_ptr = &var_ptr;
+    cout << var             << endl;
+    cout << *var_ptr        << endl;
+    cout << **var_ptr_ptr   << endl;
 
     // ----------------------------------------------------------------
     // Non const address. Non const value
