@@ -9,91 +9,86 @@ using namespace std;
 // Raw pointer
 // ==========================================================================================================
 void raw_pointer() {
+
     // ---------------------------------------------------------------
     // General
     // ---------------------------------------------------------------
-    // Pointer: A variable to store address of another variable
-    // Raw point should be avoided, use smart pointer instead
-    // * --> dereference operator (value)
-    // & --> reference operator   (address)
-    // Pointer can be used to pass func as a param
-    // Raw pointer must be manually deleted after use
+    // - Pointer is a variable to store address of another variable
+    // - Raw pointer should be avoided, use smart pointer
+    // - Raw pointer must be manually deleted after use
+    // - Pointer can be used to pass func as a param
+    // - & --> reference operator   (address)
+    // - * --> dereference operator (value)
+    // - Difference between pointer-to-variable and pointer-to-class:
+    //   - Access variable value:       *ptr
+    //   - Access class property value : ptr->property
+    // C-array and Pointer are similar in operation
+    // Pointer can point to new variable, C-array can't
 
     // ---------------------------------------------------------------
     // Initialization
     // ---------------------------------------------------------------
-    int var         = 3;
-    array arr       = {1, 2, 3, 4};
-    int arr_c[]     = {1, 2, 3, 4};
-    int *ptr_var    = &var;
-    int *ptr_arr    = arr.begin();
-    int *ptr_arr_c  = arr_c;
-    int *ptr_arr_c2 = &arr_c[0];
+    int var             = 3;
+    array<int, 4> arr   = {1, 2, 3, 4};
 
     // ---------------------------------------------------------------
-    // Address
+    // Pointer
     // ---------------------------------------------------------------
-    // Variable
-    &var;
-    ptr_var;
-    // Array
-    arr.begin();
-    ptr_arr;
-    // C array
-    &arr_c;
-    arr_c + 0;
-    ptr_arr_c;
+    int             *var_ptr   = &var; // pointer to a variable
+    array<int, 4>   *arr_ptr   = &arr; // pointer to a class
 
     // ---------------------------------------------------------------
-    // Value
+    // Value of Variable
     // ---------------------------------------------------------------
-    // Variable
-    var;
-    *ptr_var;
-    // Array
-    arr.at(1);
-    ptr_arr[1];
-    *(ptr_arr + 1);
-    // C array
-    arr_c[1];
-    ptr_arr_c[1];
-    *(ptr_arr_c + 1);
+    cout << var                 << endl;           
+    cout << *var_ptr            << endl;           
+    cout << arr.at(0)           << endl;
+    cout << arr_ptr->at(0)      << endl;
+    cout << (*arr_ptr).at(0)    << endl;
+
+    // ---------------------------------------------------------------
+    // Address of Variable
+    // ---------------------------------------------------------------
+    cout << &var                << endl;
+    cout << var_ptr             << endl;
+    cout << &arr                << endl;
+    cout << &arr.at(0)          << endl;
+    cout << arr.begin()         << endl;
+    cout << arr_ptr->begin()    << endl;
+    cout << (*arr_ptr).begin()  << endl;
+    cout << arr_ptr             << endl;
 
     // ---------------------------------------------------------------
     // Address of pointer
     // ---------------------------------------------------------------
-    &ptr_var;
-    &ptr_arr;
-    &ptr_arr_c;
+    cout << &var_ptr            << endl;
+    cout << &arr_ptr            << endl;
 
     // ---------------------------------------------------------------
     // Pointer of pointer
     // ---------------------------------------------------------------
-    int *ptr_ptr = ptr_var;  // pointer of pointer of var
-    ptr_ptr;                 // address of var
-    *ptr_ptr;                // value of var
+    int *ptr_ptr = var_ptr;
+    cout << ptr_ptr             << endl; // address of var
+    cout << *ptr_ptr            << endl; // value of var
 
     // ---------------------------------------------------------------
     // Double pointer
     // ---------------------------------------------------------------
-    int **double_ptr = &ptr_var;
-    double_ptr;    // address of ptr_var
-    *double_ptr;   // address of var
-    **double_ptr;  // value of var
+    int **double_ptr = &var_ptr;
+    cout << double_ptr            << endl; // address of var_ptr
+    cout << *double_ptr           << endl; // address of var
+    cout << **double_ptr          << endl; // value of var
 
     // ---------------------------------------------------------------
     // Array and pointer
     // ---------------------------------------------------------------
-    // array and ptr are similar in operation
-    // ptr can point to new variable, array can't
-    *ptr_arr++;  // get value of array element, increment address
-    *++ptr_arr;  // increment address, get value of array element
-    ++*ptr_arr;  // same as above
+    // *arr_ptr++            << endl;  // get value of array element, increment address
+    // *++arr_ptr            << endl;  // increment address, get value of array element
+    // ++*arr_ptr            << endl;  // same as above
 
-    // ---------------------------------------------------------------
+    // ----------------------------------------------------------------
     // Non const address. Non const value
     // ---------------------------------------------------------------
-
     // Pointer can point to other structure
     // Pointer can change structure value
     int var_a = 123;

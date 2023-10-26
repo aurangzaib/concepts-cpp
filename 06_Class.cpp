@@ -271,18 +271,6 @@ void Test() {
     ins1.num_static = 997;
     ins1.func_static();
 
-    // Pointers
-    int var = 0;
-    int arr[] = {1, 2, 3, 4};
-    const int *var_ptr = &var;             // Pointer to variable
-    const int *arr_ptr = arr;              // Pointer to array
-    NS::Cls<int, size> *inst_ptr = &ins1;  // Pointer to instance
-    cout << *var_ptr;                      // Access by Pointer
-    cout << arr_ptr[0];                    // Access by Pointer
-    ins1.get_vector();                     // Access by Instance
-    inst_ptr->get_vector();                // Access by Pointer
-    (*inst_ptr).get_vector();              // Access by Dereferenced Pointer
-
     // Debugger point
     return;
 }

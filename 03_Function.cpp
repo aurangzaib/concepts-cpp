@@ -10,10 +10,11 @@ using namespace std;
 // Notes
 // ==========================================================================================================
 
-// Functions are not first class citizen (can't be passed, can't be returned)
-// Function for mutltiple param types can be implemented using templates
-// Function overloading is not available in python due to dynamic types
-// Lambdas are first class citizen
+// - Multiple functions for multiple param types can be implemented using overloading
+// - One Function for mutltiple param types can be implemented using template
+// - Functions are not first class citizen (can't be passed, can't be returned)
+// - Python: Function overloading not available due to dynamic types
+// - Lambdas are first class citizen
 
 // ==========================================================================================================
 // Parameter passed by value
@@ -94,7 +95,7 @@ long factorial_without_recursion(long num) {
 // Factorial: Number of combinations/arrangements
 // 5! = 5 * 4!
 // factorial(num) = num * factorial(num - 1)
-// Why 0! = 1: 0 can be arranged only 1 way
+// Why 0! = 1? Because 0 can be arranged only 1 way
 long factorial_with_recursion(const long &num) {
     if (num < 0)
         return NULL;  // Handle negative numbers
@@ -105,7 +106,8 @@ long factorial_with_recursion(const long &num) {
 
 //----------------------------------------------------------------
 int main() {
-    const long num = 5;
+    const auto num = 5;
     auto combinations = factorial_with_recursion(num);
+    cout << combinations << endl;
     return 0;
 }

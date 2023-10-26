@@ -21,22 +21,26 @@ using namespace std;
 // ==========================================================================================================
 // Array:
 //      - Static size
-//      - Static type element
+//      - Same type elements
 //      - Random access using at()
+//      - Values stored contiginous
 // Vector:
 //      - Recommended
 //      - Dynamic size
-//      - Static type element
+//      - Static type elements
 //      - Random access using at()
+//      - Values stored contiginous
 //      - Iterator invalid after changes in vector
 // List:
 //      - Dynamic size
-//      - Static type element
+//      - Same type elements
 //      - Random access not possible
+//      - Values stored non-contiginous
 //      - Iterator remains valid after changes in list
 // Tuple:
-//      - Dynamic type element
+//      - Different type elements
 //      - Random access using get<>()
+//      - Values stored contiginous
 //      - To return multiple values from a function
 
 // ==========================================================================================================
@@ -61,13 +65,13 @@ int main() {
     // Initialization
     // ==========================================================================================================
 
-    int arr_c[]                     = {1, 2, 3, 4, 5};              // C Array
+    int arr_c[]                     = {1, 2, 3, 4, 5};                  // C Array
     int mat_c[2][3]                 = {{1, 2, 3}, {4, 5, 6}};       // C Matrix
-    array<int, 5> arr               = {1, 2, 3, 4, 5};              // C++ Array
+    array<int, 5> arr               = {1, 2, 3, 4, 5};            // C++ Array
     vector<int> vec                 = {1, 2, 3, 4, 5};              // C++ Vector
-    list<int> lst                   = {1, 2, 3, 4, 5};              // C++ List
-    tuple<int, float, string> tpl   = {1, 1.1, "1.1"};              // C++ Tuple with explicit type
-    tuple tpl1                      = make_tuple(2, 2.2, "2.2");    // C++ Tuple with inferred type
+    list<int> lst                   = {1, 2, 3, 4, 5};                // C++ List
+    tuple<int, float, string> tpl   = {1, 2.1, "3"};  // C++ Tuple with explicit type
+    tuple tpl1                      = make_tuple(1, 2.1, "3");           // C++ Tuple with inferred type
 
     // ==========================================================================================================
     // Size
@@ -80,7 +84,7 @@ int main() {
     tuple_size<decltype(tpl)>::value;
 
     // ==========================================================================================================
-    // Read
+    // Read Value
     // ==========================================================================================================
 
     // Access first element
@@ -89,19 +93,25 @@ int main() {
     vec.front();
     lst.front();
     get<0>(tpl);
-    arr.begin();  // Address
 
     // Access last element
     arr_c[sizeof(arr_c) / sizeof(arr_c[0]) - 1];
     arr.back();
     vec.back();
     lst.back();
-    arr.end();  // Address
 
     // Access nth element
     arr_c[2];
     arr.at(2);
     vec.at(2);
+
+    // ==========================================================================================================
+    // Read Address
+    // ==========================================================================================================
+    arr.begin();
+    arr.end();
+    vec.begin();
+    vec.end();
 
     // ==========================================================================================================
     // Insert
@@ -133,11 +143,14 @@ int main() {
     for (auto loop = 0; loop < vec.size(); loop += 1) {
         cout << vec.at(loop);
     }
-    for (const auto &iterator : vec) {
-        cout << iterator;
+    for (auto itr = vec.begin(); itr < vec.end(); itr += 1) {
+        cout << *itr << endl;
     }
-    for (const auto &iterator : lst) {
-        cout << iterator;
+    for (const auto &itr : vec) {
+        cout << itr << endl;
+    }
+    for (const auto &itr : lst) {
+        cout << itr << endl;
     }
 
     // ==========================================================================================================

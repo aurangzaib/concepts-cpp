@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 #include <string>
 
@@ -18,7 +17,8 @@
 // Precedence:          BODMAS (Bracket Order Divide Multiply Add Subtract)
 // Static storage:      Global variables (default initialized to 0)
 // Automatic storage:   Local variables  (default initialized to random number)
-// C++ namespace:       Python module:
+// C++ namespace:       Python module
+// Debugger Filters:    !Loaded, !=thread, !0x00000000, !x86_64
 
 // ==========================================================================================================
 // Initialization
@@ -67,7 +67,7 @@ int a = 0;
 namespace some_namespace {
 int a = 1;
 int b = 2;
-}
+}  // namespace some_namespace
 
 // Anonymous namespace
 namespace {
