@@ -96,3 +96,9 @@ int main() {
 
     return 0;
 }
+
+// Todos:
+// 1- Abstract Class
+// 2- Virtual Class
+// 3- Inheritance
+// 4- Polymorphism
