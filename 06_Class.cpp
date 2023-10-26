@@ -50,7 +50,7 @@ Static members
 ----------------------------------------------------
 Friend members
 ----------------------------------------------------
-- Friend function has access private/protected/public properties
+- Friend function has access to private/protected/public
 - Friend function has no access to "this" operator
 - Friend function does not need Class:: operator
 

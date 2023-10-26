@@ -107,10 +107,26 @@ long factorial_with_recursion(const long &num) {
     return num * factorial_with_recursion(num - 1);  // Handle > 1 numbers (2,..)
 }
 
+// ==========================================================================================================
+// Lambda Expression
+// ==========================================================================================================
+
+// inline function
+// Variable capture modes
+// [&]          All variables by reference
+// [=]          All variables by value
+// [v1, &v2]    v1 by value, v2 by reference
+
 //----------------------------------------------------------------
 int main() {
     const auto num = 5;
     auto combinations = factorial_with_recursion(num);
     cout << combinations << endl;
+
+    auto lamndafunc = [&]() {
+        return num;
+    };
+    lamndafunc();
+
     return 0;
 }
