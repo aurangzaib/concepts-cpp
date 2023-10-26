@@ -48,6 +48,13 @@ Static members
 - Initialized outside of class definition
 
 ----------------------------------------------------
+Friend members
+----------------------------------------------------
+- Friend function has access private/protected/public properties
+- Friend function has no access to "this" operator
+- Friend function does not need Class:: operator
+
+----------------------------------------------------
 Scope resolution operator (::)
 ----------------------------------------------------
 - Access class members outside the class definition
@@ -126,10 +133,12 @@ class Cls {
     void set_string(const string &);                                           // Setter
     const vector<T> get_vector();                                              // Getter
     const string get_string();                                                 // Getter
+    void reset_vector();                                        // Reset
     Cls operator+(const Cls &);                                                // Overloading
     void operator=(const Cls &);                                               // Overloading
     void operator+=(const Cls &);                                              // Overloading
     static void func_static();                                                 // Static Method
+    friend void reset_vector(Cls &ins);                                        // Friend Method
 };// End of class
 
 // ==========================================================================================================
@@ -211,6 +220,18 @@ const string NS::Cls<T, N>::get_string() {
     return this->private_structure.str;
 }
 
+// Reset with public function
+template <typename T, size_t N>
+void NS::Cls<T, N>::reset_vector() {
+    this->private_structure.vec.clear();
+}
+
+// Reset with friend function
+template <typename T, size_t N>
+void reset_vector(NS::Cls<T, N> &ins) {
+    ins.private_structure.vec.clear();
+}
+
 // Overloading
 template <typename T, size_t N>
 NS::Cls<T, N> NS::Cls<T, N>::operator+(const Cls &inst) {
@@ -276,6 +297,12 @@ void NS::Test() {
     NS::Cls<int, size>::func_static();
     ins1.num_static = 997;
     ins1.func_static();
+    
+    // Reset with public function
+    ins1.reset_vector();
+
+    // Reset with friend function
+    reset_vector(ins1);
 
     // Debugger point
     return;

@@ -2,6 +2,11 @@
 #include <string>
 
 // ==========================================================================================================
+// Links
+// ==========================================================================================================
+// https://www.geeksforgeeks.org/introduction-to-c-programming-language/?ref=lbp
+
+// ==========================================================================================================
 // Fonts
 // ==========================================================================================================
 
@@ -19,6 +24,8 @@
 // Automatic storage:   Local variables  (default initialized to random number)
 // C++ namespace:       Python module
 // Debugger Filters:    !Loaded, !=thread, !0x00000000, !x86_64
+// Objecy Orient:       Class, Inheritance, Polymorphism, Namespace
+// C++ vs C:            Object Orient, Templates, Overloading, Error Handling
 
 // ==========================================================================================================
 // Initialization
