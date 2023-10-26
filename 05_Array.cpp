@@ -13,8 +13,8 @@ using namespace std;
 // https://en.cppreference.com/w/cpp/container/list
 // https://en.cppreference.com/w/cpp/container/array
 // https://en.cppreference.com/w/cpp/container/vector
-// https://www.geeksforgeeks.org/tuples-in-c/
 // https://www.educba.com/c-plus-plus-vector-vs-list/
+// https://www.geeksforgeeks.org/tuples-in-c/
 
 // ==========================================================================================================
 // General
@@ -118,7 +118,7 @@ int main() {
     vec.insert(vec.end(), 55);
     lst.push_back(55);
     vec.push_back(55);
-    auto new_tpl2 = tuple_cat(tpl, make_tuple(33.5));
+    auto new_tpl2 = tuple_cat(tpl, make_tuple(55.5));
 
     // ==========================================================================================================
     // Iterate

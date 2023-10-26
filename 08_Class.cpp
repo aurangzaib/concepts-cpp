@@ -14,77 +14,77 @@ using namespace std;
 // Notes
 // ==========================================================================================================
 /*
-------------------------------------
+----------------------------------------------------
 Members
-------------------------------------
+----------------------------------------------------
 - Data member:      Properties (Variables)
 - Member function:  Methods    (Functions)
 
--------------------------------------
+----------------------------------------------------
 Private member
--------------------------------------
+----------------------------------------------------
 - Accessible inside class
 - Accessible outside class only using methods
 - Accessible using friend function/class
 - Default
 
--------------------------------------
+----------------------------------------------------
 Protected member
--------------------------------------
+----------------------------------------------------
 - Accessible by same, derived and friend
 
--------------------------------------
+----------------------------------------------------
 Public member
--------------------------------------
+----------------------------------------------------
 - Accessible inside/outside using instance
 - Struct has by default public
 - Separate for each instance
 
--------------------------------------
+----------------------------------------------------
 Static members
--------------------------------------
+----------------------------------------------------
 - Accesible inside/outside using class and instance
 - Shared by all instances (once per class)
 - Initialized outside of class definition
 
--------------------------------------
+----------------------------------------------------
 Scope resolution operator (::)
--------------------------------------
+----------------------------------------------------
 - Access class members outside the class definition
 
--------------------------------------
+----------------------------------------------------
 this->
--------------------------------------
+----------------------------------------------------
 - Access class members from inside the class
 - Optional
 
--------------------------------------
+----------------------------------------------------
 Constructor (ctor)
--------------------------------------
+----------------------------------------------------
 - Initialize class properties
 - No return type
 
--------------------------------------
+----------------------------------------------------
 Desstructor (dtor)
--------------------------------------
+----------------------------------------------------
 - Called after end-of-life of object e.g. after main
 
--------------------------------------
+----------------------------------------------------
 Operators that can be overloaded
--------------------------------------
+----------------------------------------------------
 +    -    *    /    =    <    >    +=   -=   *=   /=   <<   >>
 <<=  >>=  ==   !=   <=   >=   ++   --   %    &    ^    !    |
 ~    &=   ^=   |=   &&   ||   %=   []   ()   ,    ->*  ->   new
 
--------------------------------------
+----------------------------------------------------
 Syntax of a method
--------------------------------------
+----------------------------------------------------
 const int class::method(const int& a) const{}
 |__ return type         |__ params    |__method can't be changed
 
--------------------------------------
+----------------------------------------------------
 Constant instance
--------------------------------------
+----------------------------------------------------
 - All properties will become read-only
 - Can only access constant methods
 
@@ -152,13 +152,13 @@ NS::Cls<T, N>::Cls() : num(0) {
 template <typename T, size_t N>
 NS::Cls<T, N>::Cls(const Cls &inst) : num(inst.num) {
     // Option 1
-    private_structure.arr = inst.private_structure.arr;
-    private_structure.vec = inst.private_structure.vec;
-    private_structure.str = inst.private_structure.str;
-    // Option 2
     this->private_structure.arr = inst.private_structure.arr;
     this->private_structure.vec = inst.private_structure.vec;
     this->private_structure.str = inst.private_structure.str;
+    // Option 2
+    private_structure.arr = inst.private_structure.arr;
+    private_structure.vec = inst.private_structure.vec;
+    private_structure.str = inst.private_structure.str;
     // Option 3
     this->private_structure = {
         .arr = inst.private_structure.arr,
