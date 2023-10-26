@@ -15,6 +15,9 @@ using namespace std;
 // - Functions are not first class citizen (can't be passed, can't be returned)
 // - Python: Function overloading not available due to dynamic types
 // - Lambdas are first class citizen
+// - Syntax of a function
+//      const int function(const int& a) const{}
+//      |__ return type         |__ params    |__function can't be changed
 
 // ==========================================================================================================
 // Parameter passed by value

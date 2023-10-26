@@ -22,7 +22,8 @@ void raw_pointer() {
     //   -- Access variable value:       *ptr
     //   -- Access class property value : ptr->property
     // - C-array and Pointer are similar in operation
-    // - Pointer can point to new variable, C-array can't
+    // - Difference between pointer and c-array
+    //   -- Pointer can point to new variable, C-array can't
     // - Variable and C-Array pointers have same access syntax
     // - Variable and class pointers have same declaration syntax 
 
@@ -98,6 +99,8 @@ void raw_pointer() {
     int *ptr_null_1;
     int *ptr_null_2 = nullptr;
     int *ptr_null_3 = NULL;
+    // *ptr_null will be an exception
+    // &ptr_null will be address of pointer
 
     // ---------------------------------------------------------------
     // Volatile pointer

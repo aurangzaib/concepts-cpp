@@ -24,7 +24,7 @@ Members
 Private member
 ----------------------------------------------------
 - Accessible inside class
-- Accessible outside class only using methods
+- Accessible outside class using methods (NOT directly though instance)
 - Accessible using friend function/class
 - Default
 
@@ -77,12 +77,6 @@ Operators that can be overloaded
 ~    &=   ^=   |=   &&   ||   %=   []   ()   ,    ->*  ->   new
 
 ----------------------------------------------------
-Syntax of a method
-----------------------------------------------------
-const int class::method(const int& a) const{}
-|__ return type         |__ params    |__method can't be changed
-
-----------------------------------------------------
 Constant instance
 ----------------------------------------------------
 - All properties will become read-only
@@ -107,10 +101,10 @@ struct Structure {
     array<T, N> arr;
     vector<T> vec;
     string str;
-};
+}; // End of structure
 
 // ==========================================================================================================
-// Class
+// Class Declaration
 // ==========================================================================================================
 
 template <typename T, size_t N>
@@ -125,8 +119,8 @@ class Cls {
    public:
     static int num_static;                                                     // Static Property
     Cls();                                                                     // Default Constructor
-    Cls(const Cls &);                                                          // Copy Constructor
-    Cls(const int &, const array<T, N> &, const vector<T> &, const string &);  // Constructor
+    Cls(const Cls &);                                                          // Copy    Constructor
+    Cls(const int &, const array<T, N> &, const vector<T> &, const string &);  // Param   Constructor
     ~Cls();                                                                    // Destructor
     void set_vector(const vector<T> &);                                        // Setter
     void set_string(const string &);                                           // Setter
@@ -136,7 +130,19 @@ class Cls {
     void operator=(const Cls &);                                               // Overloading
     void operator+=(const Cls &);                                              // Overloading
     static void func_static();                                                 // Static Method
-};
+};// End of class
+
+// ==========================================================================================================
+// Test Declaration
+// ==========================================================================================================
+
+void Test();
+
+} // End of namespace
+
+// ==========================================================================================================
+// Class Definition
+// ==========================================================================================================
 
 // Static Property
 template <typename T, size_t N>
@@ -167,7 +173,7 @@ NS::Cls<T, N>::Cls(const Cls &inst) : num(inst.num) {
     };
 };
 
-// Constructor
+// Param Constructor
 template <typename T, size_t N>
 NS::Cls<T, N>::Cls(const int &num, const array<T, N> &arr, const vector<T> &vec, const string &str) {
     this->num = num;
@@ -237,10 +243,10 @@ void NS::Cls<T, N>::func_static() {
 }
 
 // ==========================================================================================================
-// Test
+// Test Definition
 // ==========================================================================================================
 
-void Test() {
+void NS::Test() {
     // size of array
     const int size = 3;
 
@@ -274,8 +280,6 @@ void Test() {
     // Debugger point
     return;
 }
-
-}  // namespace NS
 
 //---------------------------------------------------------------------------------------------------------------
 int main() {
