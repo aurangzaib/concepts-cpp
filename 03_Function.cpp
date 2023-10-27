@@ -67,7 +67,7 @@ inline auto my_function5(const int &a, const int &b) {
 }
 
 // ==========================================================================================================
-// Function overloading
+// Function overloading (Compile Time Polymorphism)
 // ==========================================================================================================
 
 int multiplier(int input1 = 1, int input2 = 1) {

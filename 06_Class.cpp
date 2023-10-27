@@ -9,6 +9,7 @@ using namespace std;
 // ==========================================================================================================
 // Link
 // ==========================================================================================================
+// - https://www.geeksforgeeks.org/c-partially-object-oriented-language/?ref=lbp
 // - https://www.geeksforgeeks.org/object-oriented-programming-in-cpp/?ref=lbp
 // - https://www.geeksforgeeks.org/friend-class-function-cpp/?ref=lbp
 // - https://www.geeksforgeeks.org/constructors-c/?ref=lbp
@@ -128,6 +129,14 @@ Constant instance
 ----------------------------------------------------
 - All properties will become read-only
 - Can only access constant methods
+
+----------------------------------------------------
+Encapsulation and Abstraction
+----------------------------------------------------
+- Logic Encapsulation: Only public functions are accessible from outside
+- Data Encapsulation:  Data is accessible through functions from outside
+- Data Abstraction:    Hide irrelevant data using access modifiers
+- Data Binding:        Bind data and functions using class
 
 */
 
