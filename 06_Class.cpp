@@ -9,11 +9,26 @@ using namespace std;
 // ==========================================================================================================
 // Link
 // ==========================================================================================================
+// - https://www.geeksforgeeks.org/object-oriented-programming-in-cpp/?ref=lbp
+// - https://www.geeksforgeeks.org/friend-class-function-cpp/?ref=lbp
+// - https://www.geeksforgeeks.org/constructors-c/?ref=lbp
 
 // ==========================================================================================================
 // Notes
 // ==========================================================================================================
 /*
+
+----------------------------------------------------
+Object Oriented Concepts
+----------------------------------------------------
+- Class
+- Encapsulation
+- Abstraction
+- Polymorphism
+- Inheritance
+- Dynamic Binding
+- Message Passing
+
 ----------------------------------------------------
 Members
 ----------------------------------------------------
@@ -21,17 +36,24 @@ Members
 - Member function:  Methods    (Functions)
 
 ----------------------------------------------------
+Access Modifier
+----------------------------------------------------
+- Private
+- Protected
+- Public
+
+----------------------------------------------------
 Private member
 ----------------------------------------------------
-- Accessible inside class
+- Accessible by class and friend function/class
 - Accessible outside class using methods (NOT directly though instance)
-- Accessible using friend function/class
 - Default
 
 ----------------------------------------------------
 Protected member
 ----------------------------------------------------
-- Accessible by same, derived and friend
+- Accessible by class, inherited class and friend class
+- Accessible outside class using methods (NOT directly though instance)
 
 ----------------------------------------------------
 Public member
@@ -50,14 +72,22 @@ Static members
 ----------------------------------------------------
 Friend members
 ----------------------------------------------------
-- Friend function has access to private/protected/public
-- Friend function has no access to "this" operator
-- Friend function does not need Class:: operator
+- It has access to private/protected/public without inheriting class
+- It is not a member function of a class
+- It has no access to "this" operator
+- It does not need Class:: operator
 
 ----------------------------------------------------
 Scope resolution operator (::)
 ----------------------------------------------------
-- Access class members outside the class definition
+- To access class methods
+- To access static properties
+
+----------------------------------------------------
+this->
+----------------------------------------------------
+- To access class properties
+- To chain methods (return *this)
 
 ----------------------------------------------------
 Functor
@@ -67,16 +97,19 @@ Functor
 - Also called function objects
 
 ----------------------------------------------------
-this->
+Constructor
 ----------------------------------------------------
-- A pointer to access class members
-- Also used for method chaining by return *this
+- Member function with same name as class
+- To initialize class properties
+- It has no return type
 
 ----------------------------------------------------
-Constructor (ctor)
+Copy Constructor
 ----------------------------------------------------
-- Initialize class properties
-- No return type
+- When copy constructor is not defined
+    - Compiler will create reference instead of copying the instance
+    - Any changes to first instance will reflect in copied instance
+- That is why copy constructor should be defined
 
 ----------------------------------------------------
 Desstructor (dtor)
@@ -116,7 +149,7 @@ struct Structure {
     array<T, N> arr;
     vector<T> vec;
     string str;
-}; // End of structure
+};  // End of structure
 
 // ==========================================================================================================
 // Class Declaration
@@ -133,9 +166,9 @@ class Cls {
 
    public:
     static int num_static;                                                     // Static Property
-    Cls();                                                                     // Default Constructor
-    Cls(const Cls &);                                                          // Copy    Constructor
-    Cls(const int &, const array<T, N> &, const vector<T> &, const string &);  // Param   Constructor
+    Cls();                                                                     // Default         Constructor
+    Cls(const Cls &);                                                          // Copy            Constructor
+    Cls(const int &, const array<T, N> &, const vector<T> &, const string &);  // Parameterized   Constructor
     ~Cls();                                                                    // Destructor
     void set_vector(const vector<T> &);                                        // Setter
     Cls &set_string(const string &);                                           // Setter (with method chaining)
@@ -148,10 +181,11 @@ class Cls {
     static void func_static();                                                 // Static Method
     friend void reset_vector(Cls &ins) {                                       // Friend Method (definition)
         ins.private_structure.vec.clear();
-    }  
-    // !! Note: When using friend with template class, it is easier to provide function definition inside class !!
+    }
+    // !! Note: When using friend with template class..
+    // ..It is easier to define function inside class !!
     // Link: https://isocpp.org/wiki/faq/templates#template-friends
-}; 
+};
 
 // ==========================================================================================================
 // Functor Declaration
@@ -171,7 +205,7 @@ class Functors {
 
 void Test();
 
-} // End of namespace
+}  // namespace NS
 
 // ==========================================================================================================
 // Class Definition
@@ -189,24 +223,20 @@ NS::Cls<T, N>::Cls() : num(0) {
 
 // Copy Constructor
 template <typename T, size_t N>
-NS::Cls<T, N>::Cls(const Cls &inst) : num(inst.num) {
+NS::Cls<T, N>::Cls(const Cls &ins) : num(ins.num), protected_structure(ins.protected_structure) {
     // Option 1
-    this->private_structure.arr = inst.private_structure.arr;
-    this->private_structure.vec = inst.private_structure.vec;
-    this->private_structure.str = inst.private_structure.str;
+    this->private_structure = ins.private_structure;
     // Option 2
-    private_structure.arr = inst.private_structure.arr;
-    private_structure.vec = inst.private_structure.vec;
-    private_structure.str = inst.private_structure.str;
+    private_structure = ins.private_structure;
     // Option 3
     this->private_structure = {
-        .arr = inst.private_structure.arr,
-        .vec = inst.private_structure.vec,
-        .str = inst.private_structure.str,
+        .arr = ins.private_structure.arr,
+        .vec = ins.private_structure.vec,
+        .str = ins.private_structure.str,
     };
 };
 
-// Param Constructor
+// Parameterized Constructor
 template <typename T, size_t N>
 NS::Cls<T, N>::Cls(const int &num, const array<T, N> &arr, const vector<T> &vec, const string &str) {
     this->num = num;
@@ -254,27 +284,27 @@ void NS::Cls<T, N>::reset_vector() {
 
 // Overloading
 template <typename T, size_t N>
-NS::Cls<T, N> NS::Cls<T, N>::operator+(const Cls &inst) {
+NS::Cls<T, N> NS::Cls<T, N>::operator+(const Cls &ins) {
     Cls new_inst;
-    new_inst.num = this->num + inst.num;
+    new_inst.num = this->num + ins.num;
     return new_inst;
 }
 template <typename T, size_t N>
-void NS::Cls<T, N>::operator=(const Cls &inst) {
+void NS::Cls<T, N>::operator=(const Cls &ins) {
     this->num = num;
-    this->private_structure = inst.private_structure;
-    this->protected_structure = inst.protected_structure;
+    this->private_structure = ins.private_structure;
+    this->protected_structure = ins.protected_structure;
 }
 template <typename T, size_t N>
-void NS::Cls<T, N>::operator+=(const Cls &inst) {
+void NS::Cls<T, N>::operator+=(const Cls &ins) {
     this->num += num;
     for (size_t loop = 0; loop < this->private_structure.arr.size(); loop += 1) {
-        this->private_structure.arr.at(loop) += inst.private_structure.arr.at(loop);
+        this->private_structure.arr.at(loop) += ins.private_structure.arr.at(loop);
     }
     for (size_t loop = 0; loop < this->private_structure.vec.size(); loop += 1) {
-        this->private_structure.vec.at(loop) += inst.private_structure.vec.at(loop);
+        this->private_structure.vec.at(loop) += ins.private_structure.vec.at(loop);
     }
-    this->private_structure.str += inst.private_structure.str;
+    this->private_structure.str += ins.private_structure.str;
 }
 
 // Static method
@@ -328,7 +358,7 @@ void NS::Test() {
     NS::Cls<int, size>::func_static();
     ins1.num_static = 997;
     ins1.func_static();
-    
+
     // Reset with public function
     ins1.reset_vector();
 

@@ -102,16 +102,33 @@ int main() {
     ++c;  // increment, then get incremented value
 
     // ==========================================================================================================
-    // Enum
+    // Enum and Enum Class
     // ==========================================================================================================
-    enum Companies {
+    // - Enum:
+    //    - Two enums cannot share same names
+    //    - Enum without scope
+    //    - Implicit cast
+    // - Enum Class:
+    //    - Two enum classes can share same names
+    //    - Preferred over Enums
+    //    - Enum with scope
+    //    - Explicit cast 
+    enum Companies1 { 
         BMW = 99,
-        Mercedes,
-        Porsche,
-        Audi,
+        Mercedes, 
+        Porsche, 
+        Audi, 
+        VW
+    };
+    enum class Companies2 { 
+        BMW = 99, 
+        Mercedes, 
+        Porsche, 
+        Audi, 
         VW
     };
     std::cout << Mercedes << std::endl;
+    std::cout << static_cast<int>(Companies2::Mercedes) << std::endl;
 
     return 0;
 }

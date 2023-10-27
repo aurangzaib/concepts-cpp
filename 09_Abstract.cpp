@@ -11,11 +11,11 @@ using namespace std;
 // ==========================================================================================================
 // Notes
 // ==========================================================================================================
-// - Abstract class has at least one pure virtual function (It is used as a base class by other classes)
+// - Abstract class has at least one pure virtual function (it is used as a base class by other classes)
 // - Inherited class from abstract class has to provide the implementation of pure virtual function
 // - Interface is an abstract class whose all functions are pure virtual
 // - Pure virtual function has no implementation
-// - Abstract class can have no instances
+// - Abstract class cannot have instances
 // - Abstract class can have pointers
 
 // ==========================================================================================================
