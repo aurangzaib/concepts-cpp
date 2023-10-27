@@ -3,29 +3,34 @@
 
 using namespace std;
 
+// ==========================================================================================================
+// Link
+// ==========================================================================================================
+// - https://www.geeksforgeeks.org/dangling-void-null-wild-pointers/?ref=lbp
+
+// ==========================================================================================================
+// General
+// ==========================================================================================================
+// - Pointer is a variable to store address of another variable
+// - Raw pointer should be avoided, use smart pointer
+// - Raw pointer must be manually deleted after use
+// - Pointer can be used to pass func as a param
+// - & --> reference operator   (address)
+// - * --> dereference operator (value)
+// - Difference between pointer-to-variable and pointer-to-class:
+//   -- Access variable value:       *ptr
+//   -- Access class property value : ptr->property
+// - C-array and Pointer are similar in operation
+// - Difference between pointer and c-array
+//   -- Pointer can point to new variable, C-array can't
+// - Variable and C-Array pointers have same access syntax
+// - Variable and class pointers have same declaration syntax 
+
 void raw_pointer() {
 
     // ==========================================================================================================
     // Main topics
     // ==========================================================================================================
-
-    // ---------------------------------------------------------------
-    // General
-    // ---------------------------------------------------------------
-    // - Pointer is a variable to store address of another variable
-    // - Raw pointer should be avoided, use smart pointer
-    // - Raw pointer must be manually deleted after use
-    // - Pointer can be used to pass func as a param
-    // - & --> reference operator   (address)
-    // - * --> dereference operator (value)
-    // - Difference between pointer-to-variable and pointer-to-class:
-    //   -- Access variable value:       *ptr
-    //   -- Access class property value : ptr->property
-    // - C-array and Pointer are similar in operation
-    // - Difference between pointer and c-array
-    //   -- Pointer can point to new variable, C-array can't
-    // - Variable and C-Array pointers have same access syntax
-    // - Variable and class pointers have same declaration syntax 
 
     // ---------------------------------------------------------------
     // Declaration
@@ -74,6 +79,10 @@ void raw_pointer() {
     cout << &arr_ptr            << endl;
     cout << &arrc_ptr           << endl;
 
+    // ==========================================================================================================
+    // Types of pointer
+    // ==========================================================================================================
+
     // ---------------------------------------------------------------
     // Double pointer
     // ---------------------------------------------------------------
@@ -83,28 +92,41 @@ void raw_pointer() {
     cout << **var_ptr_ptr   << endl;
 
     // ---------------------------------------------------------------
+    // Dangling pointer
+    // ---------------------------------------------------------------
+    // - When the memory location pointed by a pointer gets freed/deleted
+    // - The pointer becomes dangling pointer
+    // - If variable is static, then pointer does not become dangling 
+
+    // ---------------------------------------------------------------
     // Void pointer
     // ---------------------------------------------------------------
-
-    // Void pointer points to a data which has no type
-    // Void pointer can not be deferenced
-    // It can be used as a placeholder when datatype of structure is not known
+    // - Void pointer points to a data which has no type
+    // - Void pointer can not be deferenced
+    // - Void pointer is a type
+    
     void *void_ptr;
 
     // ---------------------------------------------------------------
     // Null pointer
     // ---------------------------------------------------------------
+    // - Null pointer points to a data which has no address
+    // - Null pointer is a value
 
-    // Null pointer points to a data which has no address
     int *ptr_null_1;
     int *ptr_null_2 = nullptr;
     int *ptr_null_3 = NULL;
+
     // *ptr_null will be an exception
     // &ptr_null will be address of pointer
 
     // ---------------------------------------------------------------
-    // Volatile pointer
+    // Wild pointer
     // ---------------------------------------------------------------
+    // - When a pointer is not initialized to any address
+    // - The pointer will point to a garbage address
+    
+    int *wild_ptr;
 
     // ==========================================================================================================
     // Extra topics

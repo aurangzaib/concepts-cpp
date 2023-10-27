@@ -88,11 +88,11 @@ namespace SN = some_namespace;
 int main() {
     // Namespace
     int a = 3;
-    std::cout << ::a;                // global
-    std::cout << some_namespace::a;  // namespace
-    std::cout << SN::b;              // namespace
-    std::cout << a;                  // local
-    std::cout << c;                  // nameless namespace
+    std::cout << ::a << std::endl;                // global
+    std::cout << some_namespace::a << std::endl;  // namespace
+    std::cout << SN::b << std::endl;              // namespace
+    std::cout << a << std::endl;                  // local
+    std::cout << c << std::endl;                  // nameless namespace
 
     // ==========================================================================================================
     // Post and pre increment/decrement
@@ -101,11 +101,21 @@ int main() {
     c++;  // get value, then increment for next time
     ++c;  // increment, then get incremented value
 
+    // ==========================================================================================================
+    // Enum
+    // ==========================================================================================================
+    enum Companies {
+        BMW = 99,
+        Mercedes,
+        Porsche,
+        Audi,
+        VW
+    };
+    std::cout << Mercedes << std::endl;
+
     return 0;
 }
 
 // Todos:
-// 1- Abstract Class
-// 2- Virtual Class
-// 3- Inheritance
-// 4- Polymorphism
+// 1- Inheritance
+// 2- Polymorphism

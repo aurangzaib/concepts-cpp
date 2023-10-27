@@ -6,18 +6,33 @@
 
 using namespace std;
 
-template <typename T>
-void tester(T func) {
-    int num2 = 34;
-    func(num2);
-}
-int main() {
-    int num1 = 33;
-    // Lamda expression
-    auto func = [&num1](int num2) -> void {
-        cout << num1 << endl;
-        cout << num2 << endl;
-    };
+namespace NS {
+struct Structure {
+    int a;
+};
 
-    tester(func);
+template <typename T>
+class Cls {
+   private:
+    T num = 99;
+
+   public:
+    T my_func();
+    inline friend T my_func(const Cls &ins) {
+        cout << ins.num << endl;
+        return ins.num;
+    }
+};
+}  // namespace NS
+
+template <typename T>
+T NS::Cls<T>::my_func() {
+    cout << this->num << endl;
+    return this->num;
+}
+
+int main() {
+    NS::Cls<int> ins;
+    ins.my_func();
+    my_func(ins);
 }

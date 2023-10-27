@@ -69,8 +69,8 @@ Functor
 ----------------------------------------------------
 this->
 ----------------------------------------------------
-- Access class members from inside the class
-- Optional
+- A pointer to access class members
+- Also used for method chaining by return *this
 
 ----------------------------------------------------
 Constructor (ctor)
@@ -138,16 +138,20 @@ class Cls {
     Cls(const int &, const array<T, N> &, const vector<T> &, const string &);  // Param   Constructor
     ~Cls();                                                                    // Destructor
     void set_vector(const vector<T> &);                                        // Setter
-    void set_string(const string &);                                           // Setter
+    Cls &set_string(const string &);                                           // Setter (with method chaining)
     const vector<T> get_vector();                                              // Getter
     const string get_string();                                                 // Getter
-    void reset_vector();                                        // Reset
+    void reset_vector();                                                       // Reset
     Cls operator+(const Cls &);                                                // Overloading
     void operator=(const Cls &);                                               // Overloading
     void operator+=(const Cls &);                                              // Overloading
     static void func_static();                                                 // Static Method
-    friend void reset_vector(Cls &ins);                                        // Friend Method
-};// End of class
+    friend void reset_vector(Cls &ins) {                                       // Friend Method (definition)
+        ins.private_structure.vec.clear();
+    }  
+    // !! Note: When using friend with template class, it is easier to provide function definition inside class !!
+    // Link: https://isocpp.org/wiki/faq/templates#template-friends
+}; 
 
 // ==========================================================================================================
 // Functor Declaration
@@ -158,7 +162,7 @@ class Functors {
     int num = 33;
 
    public:
-    int operator()(const int &);  // () Overloading () operator
+    int operator()(const int &);  // Overloading () operator
 };
 
 // ==========================================================================================================
@@ -226,8 +230,10 @@ void NS::Cls<T, N>::set_vector(const vector<T> &vec) {
     }
 }
 template <typename T, size_t N>
-void NS::Cls<T, N>::set_string(const string &str) {
+NS::Cls<T, N> &NS::Cls<T, N>::set_string(const string &str) {
     this->private_structure.str = str;
+    // Method chaining
+    return *this;
 }
 
 // Getters
@@ -244,12 +250,6 @@ const string NS::Cls<T, N>::get_string() {
 template <typename T, size_t N>
 void NS::Cls<T, N>::reset_vector() {
     this->private_structure.vec.clear();
-}
-
-// Reset with friend function
-template <typename T, size_t N>
-void reset_vector(NS::Cls<T, N> &ins) {
-    ins.private_structure.vec.clear();
 }
 
 // Overloading
@@ -320,6 +320,9 @@ void NS::Test() {
     vector<int> vec5 = ins1.get_vector();
     vector<int> vec6 = ins3.get_vector();
 
+    // Method chaining
+    ins1.set_string("Hello").get_string();
+
     // Static property
     NS::Cls<int, size>::num_static = 998;
     NS::Cls<int, size>::func_static();
@@ -330,6 +333,7 @@ void NS::Test() {
     ins1.reset_vector();
 
     // Reset with friend function
+    // No namespace is used
     reset_vector(ins1);
 
     // Functor
