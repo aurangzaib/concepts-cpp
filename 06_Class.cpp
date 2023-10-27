@@ -60,6 +60,13 @@ Scope resolution operator (::)
 - Access class members outside the class definition
 
 ----------------------------------------------------
+Functor
+----------------------------------------------------
+- A Class whose () operator is overloaded
+- Instance can be called as a function
+- Also called function objects
+
+----------------------------------------------------
 this->
 ----------------------------------------------------
 - Access class members from inside the class
@@ -94,13 +101,14 @@ Constant instance
 using namespace std;
 
 // ==========================================================================================================
-// Namespace
+// Namespace Declaration
 // ==========================================================================================================
 
+// Namespace
 namespace NS {
 
 // ==========================================================================================================
-// Structure
+// Structure Declaration
 // ==========================================================================================================
 
 template <typename T, size_t N>
@@ -140,6 +148,18 @@ class Cls {
     static void func_static();                                                 // Static Method
     friend void reset_vector(Cls &ins);                                        // Friend Method
 };// End of class
+
+// ==========================================================================================================
+// Functor Declaration
+// ==========================================================================================================
+
+class Functors {
+   private:
+    int num = 33;
+
+   public:
+    int operator()(const int &);  // () Overloading () operator
+};
 
 // ==========================================================================================================
 // Test Declaration
@@ -264,6 +284,14 @@ void NS::Cls<T, N>::func_static() {
 }
 
 // ==========================================================================================================
+// Functor Definition
+// ==========================================================================================================
+
+int NS::Functors::operator()(const int &param) {
+    return this->num + param;
+}
+
+// ==========================================================================================================
 // Test Definition
 // ==========================================================================================================
 
@@ -303,6 +331,10 @@ void NS::Test() {
 
     // Reset with friend function
     reset_vector(ins1);
+
+    // Functor
+    NS::Functors functor;
+    cout << functor(1);
 
     // Debugger point
     return;
