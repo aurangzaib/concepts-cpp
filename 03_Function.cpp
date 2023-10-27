@@ -78,6 +78,13 @@ double multiplier(double input1 = 1.0, double input2 = 1.0) {
 }
 
 // ==========================================================================================================
+// Trailing Return Type
+// ==========================================================================================================
+auto my_function(void) -> int {
+    return 1;
+}
+
+// ==========================================================================================================
 // Recursion
 // ==========================================================================================================
 
@@ -111,11 +118,21 @@ long factorial_with_recursion(const long &num) {
 // Lambda Expression
 // ==========================================================================================================
 
-// inline function
-// Variable capture modes
-// [&]          All variables by reference
-// [=]          All variables by value
-// [v1, &v2]    v1 by value, v2 by reference
+// Anonymous functions which are defined inline
+// Lamda expressions can be passed as a parameter (unlike function) for callback etc.
+// Syntax:
+//   auto fn_name =[]() -> int {};
+//   ->         return type
+//   []         Lambda introducer (capture mode)
+// Variable capture modes:
+//   [&]          All variables by reference
+//   [=]          All variables by value
+//   [v1, &v2]    v1 by value, v2 by reference
+template <typename T>
+void lamda_tester(T expression) {
+    int a = 33;
+    cout << expression(a);
+}
 
 //----------------------------------------------------------------
 int main() {
@@ -123,10 +140,15 @@ int main() {
     auto combinations = factorial_with_recursion(num);
     cout << combinations << endl;
 
-    auto lamndafunc = [&]() {
-        return num;
+    // ----------------------------------------------------
+    // Lamda Expression
+    // ----------------------------------------------------
+    auto L = [&](const int &param) -> int {
+        if (num > param) {
+            return num;
+        }
+        return param;
     };
-    lamndafunc();
-
+    lamda_tester(L);
     return 0;
 }
