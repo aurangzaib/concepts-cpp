@@ -19,29 +19,31 @@ using namespace std;
 // ==========================================================================================================
 // Notes
 // ==========================================================================================================
-// Array:
-//      - Static size
-//      - Same type elements
-//      - Random access using at()
-//      - Values stored contiginous
-// Vector:
-//      - Recommended
-//      - Dynamic size
-//      - Same type elements
-//      - Random access using at()
-//      - Values stored contiginous
-//      - Iterator invalid after changes in vector
-// List:
-//      - Dynamic size
-//      - Same type elements
-//      - Random access not possible
-//      - Values stored non-contiginous
-//      - Iterator remains valid after changes in list
-// Tuple:
-//      - Different type elements
-//      - Random access using get<>()
-//      - Values stored contiginous
-//      - To return multiple values from a function
+/*
+Array:
+     - Static size
+     - Same type elements
+     - Random access using at()
+     - Values stored contiginous
+Vector:
+     - Recommended
+     - Dynamic size
+     - Same type elements
+     - Random access using at()
+     - Values stored contiginous
+     - Iterator invalid after changes in vector
+List:
+     - Dynamic size
+     - Same type elements
+     - Random access not possible
+     - Values stored non-contiginous
+     - Iterator remains valid after changes in list
+Tuple:
+     - Different type elements
+     - Random access using get<>()
+     - Values stored contiginous
+     - To return multiple values from a function
+*/
 
 // ==========================================================================================================
 // Declaration

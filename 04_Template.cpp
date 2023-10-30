@@ -4,14 +4,17 @@ using namespace std;
 // ==========================================================================================================
 // Link
 // ==========================================================================================================
-// https://www.geeksforgeeks.org/templates-cpp/?ref=lbp
+// - https://www.geeksforgeeks.org/templates-cpp/?ref=lbp
 
 // ==========================================================================================================
 // Notes
 // ==========================================================================================================
-// - To define a function/class for a generic type where type can be inferred later on usage
-// - Type as well as value can be templatized     (<typename T, size_t N>)
-// - typename or class for template type are same (<typename T, class U>)
+/*
+- To define a function/class for a generic type where type can be inferred later on usage
+- Type as well as value can be templatized     (<typename T, size_t N>)
+- typename or class for template type are same (<typename T, class U>)
+- Variadic template is a function which takes N parameters
+*/
 
 // ==========================================================================================================
 // Template

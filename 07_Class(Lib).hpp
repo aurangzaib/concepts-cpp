@@ -1,28 +1,30 @@
 #include <iostream>
 
+using namespace std;
+
 // ==========================================================================================================
 // General
 // ==========================================================================================================
 /*
- - access levels      public  protected   private
- - same class         yes     yes         yes
- - derived class      yes     yes
- - not members        yes
+- Access levels      Public  Protected   Private
+- Same class         yes     yes         yes
+- Inherit class      yes     yes
+- Non members        yes
 
- - Public Inheritance:    public remains public in derived
- - Protected Inheritance: public remains protected in derived
- - Private Inheritance:   public remains private in derived
+- Inheritance:
+    Private:   Public becomes private
+    Protected: Public becomes protected
+    Public:    Public becomes public
 
- - In most use cases, derived class inherits base as public
+- In most use cases, derived class inherits base as public
 
- - Public inheritance inherits all base parts except:
-        ctor and dtor
-        = operator
-        friends
-        private
+- Public inheritance inherits all base parts except:
+    ctor and dtor
+    = operator
+    friends
+    private
 
 */
-using namespace std;
 
 // ==========================================================================================================
 // Base Class Declaration
