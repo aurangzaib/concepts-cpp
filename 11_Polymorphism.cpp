@@ -22,25 +22,25 @@ Run Time Polymorphism
 - Also called Late Binding
 - Function overriding
 
+----------------------------------------------------
+Note
+----------------------------------------------------
+- Base pointer can point to any of the child class instance
+- Base pointer can point to child class methods only which are defined in base class also.
+- Thats why we create virtual members in base class and define actual implementations in derived classes.
+
 */
 
-void get_info(BMW *car) {
-    car->get_company();
-    car->get_code();
-    car->get_fuel();
-    car->get_speed();
-}
-
 int main() {
-    cout << "Polymorphism" << endl;
-    cout << "-----------------------" << endl;
-    BMW *car;
-    Series1 series1;
-    Series3 series3;
+    Students* student;          // Pointer of Base class
+    Student1<double> student1;  // Instance of Child class
+    Student2<double> student2;  // Instance of Child class
 
-    car = &series1;
-    get_info(car);
-    cout << "-----------------------" << endl;
-    car = &series3;
-    get_info(car);
+    student = &student1;                       // Polymorphism: student pointer to student1
+    student1.print(student->get_child_key());  // Note: print is accessed through student1
+    cout << student->get_child() << endl;
+
+    student = &student2;                       // Polymorphism: student pointer to student2
+    student2.print(student->get_child_key());  // Note: print is accessed through student2
+    cout << student->get_child() << endl;
 }

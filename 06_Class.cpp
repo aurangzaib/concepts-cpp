@@ -81,7 +81,7 @@ Friend members
 ----------------------------------------------------
 Scope resolution operator (::)
 ----------------------------------------------------
-- To access class methods
+- To access class methods outside declaration
 - To access static properties
 
 ----------------------------------------------------
@@ -94,7 +94,7 @@ this->
 Functor
 ----------------------------------------------------
 - A Class whose () operator is overloaded
-- Instance can be called as a function
+- Instance can be invoked as a function
 - Also called function objects
 
 ----------------------------------------------------
@@ -179,7 +179,7 @@ class Cls {
     Cls(const Cls &);                                                          // Copy            Constructor
     Cls(const int &, const array<T, N> &, const vector<T> &, const string &);  // Parameterized   Constructor
     ~Cls();                                                                    // Destructor
-    void set_vector(const vector<T> &);                                        // Setter
+    Cls set_vector(const vector<T> &);                                         // Setter
     Cls &set_string(const string &);                                           // Setter (with method chaining)
     const vector<T> get_vector();                                              // Getter
     const string get_string();                                                 // Getter
@@ -187,25 +187,14 @@ class Cls {
     Cls operator+(const Cls &);                                                // Overloading
     void operator=(const Cls &);                                               // Overloading
     void operator+=(const Cls &);                                              // Overloading
+    void operator()();                                                         // Overloading (Functor)
     static void func_static();                                                 // Static Method
-    friend void reset_vector(Cls &ins) {                                       // Friend Method (definition)
-        ins.private_structure.vec.clear();
+    friend Cls set_vector(Cls &ins, const vector<T> vec) {                     // Friend Method (definition)
+        ins.private_structure.vec = vec;
+        return ins;
     }
-    // !! Note: When using friend with template class..
-    // ..It is easier to define function inside class !!
+    // Note: When using friend with template class, its easier to provide inline definition
     // Link: https://isocpp.org/wiki/faq/templates#template-friends
-};
-
-// ==========================================================================================================
-// Functor Declaration
-// ==========================================================================================================
-
-class Functors {
-   private:
-    int num = 33;
-
-   public:
-    int operator()(const int &);  // Overloading () operator
 };
 
 // ==========================================================================================================
@@ -260,18 +249,20 @@ NS::Cls<T, N>::~Cls() {
 
 // Setters
 template <typename T, size_t N>
-void NS::Cls<T, N>::set_vector(const vector<T> &vec) {
+NS::Cls<T, N> NS::Cls<T, N>::set_vector(const vector<T> &vec) {
     // remove old elements
     this->private_structure.vec.clear();
     // insert new elements
-    for (const T &itr : vec) {
-        this->private_structure.vec.push_back(itr);
+    for (const T &element : vec) {
+        this->private_structure.vec.push_back(element);
     }
+    // Method chaining
+    return *this;
 }
 template <typename T, size_t N>
 NS::Cls<T, N> &NS::Cls<T, N>::set_string(const string &str) {
     this->private_structure.str = str;
-    // Method chaining
+
     return *this;
 }
 
@@ -316,18 +307,17 @@ void NS::Cls<T, N>::operator+=(const Cls &ins) {
     this->private_structure.str += ins.private_structure.str;
 }
 
+// Overloading (Functor)
+template <typename T, size_t N>
+void NS::Cls<T, N>::operator()() {
+    for_each(this->private_structure.vec.begin(), this->private_structure.vec.end(),
+             [](const T &element) { cout << element << endl; });
+}
+
 // Static method
 template <typename T, size_t N>
 void NS::Cls<T, N>::func_static() {
     cout << endl << Cls::num_static << endl;
-}
-
-// ==========================================================================================================
-// Functor Definition
-// ==========================================================================================================
-
-int NS::Functors::operator()(const int &param) {
-    return this->num + param;
 }
 
 // ==========================================================================================================
@@ -341,7 +331,9 @@ void NS::Test() {
     // Instantiation
     NS::Cls<int, size> ins1;        // Default constructor
     NS::Cls<int, size> ins2(ins1);  // Copy constructor
-    NS::Cls<int, size> ins3(33, (array<int, size>){1, 2, 3}, (vector<int>){4, 5, 6}, "Hello World");  // Cosntructor
+    NS::Cls<int, size> ins3(33, array<int, 3>{1, 2, 3}, vector<int>{4, 5, 6}, string{"Hello World"});  // Constructor
+    NS::Cls<int, size> ins4(33, array{1, 2, 3}, vector{4, 5, 6}, "Hello World");                       // Constructor
+
     // Getter Setter
     vector<int> vec1 = ins1.get_vector();
     vector<int> vec2 = ins3.get_vector();
@@ -349,18 +341,22 @@ void NS::Test() {
     vector<int> vec3 = ins1.get_vector();
 
     // Overloading
-    NS::Cls<int, size> ins4 = ins1 + ins3;  // + overloaded
+    NS::Cls<int, size> ins5 = ins1 + ins3;  // + overloaded
     ins1 = ins3;                            // = overloaded
     ins1 += ins3;                           // += overloaded
 
-    // ins1 is not a reference of ins3
-    vector<int> vec4 = ins1.get_vector();
-    ins3.set_vector((vector<int>){-99, -99, -99});
-    vector<int> vec5 = ins1.get_vector();
-    vector<int> vec6 = ins3.get_vector();
-
     // Method chaining
     ins1.set_string("Hello").get_string();
+
+    // No reference
+    vector<int> vec4 = ins1.get_vector();
+    vector<int> vec5 = ins3.get_vector();
+
+    // Function and functor
+    ins3.set_vector((vector<int>){-97, -98, -99})();
+
+    // Friend function and functor
+    set_vector(ins1, vector<int>{-1, -2, -3})();
 
     // Static property
     NS::Cls<int, size>::num_static = 998;
@@ -371,13 +367,8 @@ void NS::Test() {
     // Reset with public function
     ins1.reset_vector();
 
-    // Reset with friend function
-    // No namespace is used
-    reset_vector(ins1);
-
     // Functor
-    NS::Functors functor;
-    cout << functor(1);
+    ins1();
 
     // Debugger point
     return;

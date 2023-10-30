@@ -17,7 +17,7 @@ using namespace std;
 // https://www.geeksforgeeks.org/tuples-in-c/
 
 // ==========================================================================================================
-// General
+// Notes
 // ==========================================================================================================
 // Array:
 //      - Static size
@@ -27,7 +27,7 @@ using namespace std;
 // Vector:
 //      - Recommended
 //      - Dynamic size
-//      - Static type elements
+//      - Same type elements
 //      - Random access using at()
 //      - Values stored contiginous
 //      - Iterator invalid after changes in vector
@@ -65,13 +65,21 @@ int main() {
     // Initialization
     // ==========================================================================================================
 
-    int arr_c[]                     = {1, 2, 3, 4, 5};                  // C Array
-    int mat_c[2][3]                 = {{1, 2, 3}, {4, 5, 6}};       // C Matrix
-    array<int, 5> arr               = {1, 2, 3, 4, 5};            // C++ Array
-    vector<int> vec                 = {1, 2, 3, 4, 5};              // C++ Vector
-    list<int> lst                   = {1, 2, 3, 4, 5};                // C++ List
-    tuple<int, float, string> tpl   = {1, 2.1, "3"};  // C++ Tuple with explicit type
-    tuple tpl1                      = make_tuple(1, 2.1, "3");           // C++ Tuple with inferred type
+    int arr_c[5]                    = {1, 2, 3, 4, 5};                  // C Array
+    int mat_c[2][3]                 = {{1, 2, 3}, {4, 5, 6}};           // C Matrix
+    array<int, 5> arr               = {1, 2, 3, 4, 5};                  // C++ Array
+    vector<int> vec                 = {1, 2, 3, 4, 5};                  // C++ Vector
+    list<int> lst                   = {1, 2, 3, 4, 5};                  // C++ List
+    tuple<int, float, string> tpl   = {1, 2.1, "3"};                    // C++ Tuple with explicit type
+
+    // ==========================================================================================================
+    // Alternate Initialization
+    // ==========================================================================================================
+    int arr_c_alt[]                 = {1, 2, 3, 4, 5};                  // C Array
+    array arr_alt                   = {1, 2, 3, 4, 5};                  // C++ Array
+    vector vec_alt                  = {1, 2, 3, 4, 5};                  // C++ Vector
+    list lst_alt                    = {1, 2, 3, 4, 5};                  // C++ List
+    tuple tpl_alt                   = make_tuple(1, 2.1, "3");          // C++ Tuple with implicit type
 
     // ==========================================================================================================
     // Size
@@ -124,10 +132,10 @@ int main() {
     auto new_tpl1 = tuple_cat(make_tuple(33.5), tpl);
 
     // Insert last element
-    lst.insert(lst.end(), 55);
     vec.insert(vec.end(), 55);
-    lst.push_back(55);
+    lst.insert(lst.end(), 55);
     vec.push_back(55);
+    lst.push_back(55);
     auto new_tpl2 = tuple_cat(tpl, make_tuple(55.5));
 
     // ==========================================================================================================
@@ -137,20 +145,14 @@ int main() {
     for (auto loop = 0; loop < sizeof(arr_c) / sizeof(arr_c[0]); loop += 1) {
         cout << arr_c[loop];
     }
-    for (auto loop = 0; loop < arr.size(); loop += 1) {
-        cout << arr.at(loop);
+    for (const auto &element : arr) {
+        cout << element << endl;
     }
-    for (auto loop = 0; loop < vec.size(); loop += 1) {
-        cout << vec.at(loop);
+    for (const auto &element : vec) {
+        cout << element << endl;
     }
-    for (auto itr = vec.begin(); itr < vec.end(); itr += 1) {
-        cout << *itr << endl;
-    }
-    for (const auto &itr : vec) {
-        cout << itr << endl;
-    }
-    for (const auto &itr : lst) {
-        cout << itr << endl;
+    for (const auto &element : lst) {
+        cout << element << endl;
     }
 
     // ==========================================================================================================

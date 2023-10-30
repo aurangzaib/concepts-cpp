@@ -21,11 +21,9 @@
 // sizeof (var):        To get size of a variable
 // Precedence:          BODMAS (Bracket Order Divide Multiply Add Subtract)
 // Static storage:      Global variables (default initialized to 0)
-// Automatic storage:   Local variables  (default initialized to random number)
-// C++ namespace:       Python module
+// Automatic storage:   Local variables  (default initialized to random value)
+// C++ namespace:       Python module file
 // Debugger Filters:    !Loaded, !=thread, !0x00000000, !x86_64
-// Objecy Orient:       Class, Inheritance, Polymorphism, Namespace
-// C++ vs C:            Object Orient, Templates, Overloading, Error Handling
 
 // ==========================================================================================================
 // Initialization
@@ -105,34 +103,20 @@ int main() {
     // Enum and Enum Class
     // ==========================================================================================================
     // - Enum:
-    //    - Two enums cannot share same names
-    //    - Enum without scope
+    //    - Two enums cannot share same name
+    //    - Without scope
     //    - Implicit cast
     // - Enum Class:
     //    - Two enum classes can share same names
     //    - Preferred over Enums
-    //    - Enum with scope
-    //    - Explicit cast 
-    enum Companies1 { 
-        BMW = 99,
-        Mercedes, 
-        Porsche, 
-        Audi, 
-        VW
-    };
-    enum class Companies2 { 
-        BMW = 99, 
-        Mercedes, 
-        Porsche, 
-        Audi, 
-        VW
-    };
+    //    - With scope
+    //    - Explicit cast
+    
+    enum Companies1       { BMW = 99, Mercedes, Porsche, Audi, VW };
+    enum class Companies2 { BMW = 99, Mercedes, Porsche, Audi, VW };
+
     std::cout << Mercedes << std::endl;
     std::cout << static_cast<int>(Companies2::Mercedes) << std::endl;
 
     return 0;
 }
-
-// Todos:
-// 1- Inheritance
-// 2- Polymorphism
