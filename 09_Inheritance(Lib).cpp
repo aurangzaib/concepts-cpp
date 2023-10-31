@@ -1,4 +1,19 @@
-#include "07_Class(Lib).hpp"
+/*
+
+ Description:
+ Inheritance Definition
+ 
+ Modifications:
+ ---------------------------------------------------------------------------------------
+ Date      Vers.  Comment                                                     Name
+ ---------------------------------------------------------------------------------------
+ 01.10.11  01.00  Created												      Siddiqui
+ 30.10.23  02.00  Updated                                                     Siddiqui
+ ---------------------------------------------------------------------------------------
+
+*/
+
+#include "09_Inheritance(Lib).hpp"
 
 using namespace std;
 
