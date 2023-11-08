@@ -47,15 +47,15 @@ Note
 */
 
 int main() {
-    Students* student;          // Pointer of Base class
-    Student1<double> student1;  // Instance of Child class
-    Student2<double> student2;  // Instance of Child class
+    BaseClass* base_instance;          // Pointer of Base class
+    SubClass1<double> sub_instance1;   // Instance of Child class
+    SubClass2<double> sub_instance2;   // Instance of Child class
 
-    student = &student1;                       // Polymorphism: student pointer to student1
-    student1.print(student->get_child_key());  // Note: print is accessed through student1
-    cout << student->get_child() << endl;
+    base_instance = &sub_instance1;                       // Polymorphism: base_instance pointer to sub_instance1
+    sub_instance1.print(base_instance->get_child_key());  // Note: print is accessed through sub_instance1
+    cout << base_instance->get_child() << endl;
 
-    student = &student2;                       // Polymorphism: student pointer to student2
-    student2.print(student->get_child_key());  // Note: print is accessed through student2
-    cout << student->get_child() << endl;
+    base_instance = &sub_instance2;                       // Polymorphism: base_instance pointer to sub_instance2
+    sub_instance2.print(base_instance->get_child_key());  // Note: print is accessed through sub_instance2
+    cout << base_instance->get_child() << endl;
 }

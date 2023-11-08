@@ -51,7 +51,7 @@ class Printer {
     inline void print(const T &);
 };
 
-class Students {
+class BaseClass {
    private:
     string school;
     vector<int> children;
@@ -62,7 +62,7 @@ class Students {
     int child;
 
    public:
-    Students();
+    BaseClass();
     void set_child();
     int get_standard();
     double get_grade();
@@ -71,21 +71,21 @@ class Students {
 };
 
 // ==========================================================================================================
-// Child Class Declaration
+// Sub Class Declaration
 // ==========================================================================================================
 template <typename T>
-class Student1 : public Students, public Printer<T> {
+class SubClass1 : public BaseClass, public Printer<T> {
    public:
-    Student1();
+    SubClass1();
     double get_child_key();
 };
 
 // ==========================================================================================================
-// Child Class Declaration
+// Sub Class Declaration
 // ==========================================================================================================
 template <typename T>
-class Student2 : public Students, public Printer<T> {
+class SubClass2 : public BaseClass, public Printer<T> {
    public:
-    Student2();
+    SubClass2();
     double get_child_key();
 };
