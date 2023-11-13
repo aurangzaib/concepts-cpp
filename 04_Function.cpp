@@ -12,7 +12,7 @@
  ---------------------------------------------------------------------------------------
 
 */
-
+#include <functional>
 #include <iostream>
 using namespace std;
 
@@ -26,7 +26,7 @@ using namespace std;
 // ==========================================================================================================
 /*
 - Multiple functions for multiple param types can be implemented using overloading
-- One function for mutltiple param types can be implemented using template
+- One function for multiple param types can be implemented using template
 - Function is not first class citizen (can't be passed, can't be returned)
 - Python: Function overloading not available due to dynamic types
 - Lambdas are first class citizen
@@ -132,6 +132,9 @@ long factorial_with_recursion(const long &num) {
 //     [&]          All variables by reference
 //     [=]          All variables by value
 //     [v1, &v2]    v1 by value, v2 by reference
+// - Syntax:
+//     Function: void abc(){}
+//     Lambda:   auto abc=[]()->void{}
 void lamda_tester() {
     int num1 = 33;
     int num2 = 55;
@@ -180,6 +183,7 @@ int main() {
     // Lamda expression
     lamda_tester();
     // Partial function
+    func("Siddiqui", "Rosenheim", 30, 5.9);
     partial_func("Siddiqui", 5.9);
     // Variadic template
     printer(1, 2, 3);

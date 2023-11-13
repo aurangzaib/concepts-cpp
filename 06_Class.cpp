@@ -62,14 +62,14 @@ Access Modifier
 Private member
 ----------------------------------------------------
 - Accessible by class and friend function/class
-- Accessible outside class using methods (NOT directly though instance)
+- Accessible outside class using methods (NOT directly through instance)
 - Default
 
 ----------------------------------------------------
 Protected member
 ----------------------------------------------------
 - Accessible by class, inherited class and friend class
-- Accessible outside class using methods (NOT directly though instance)
+- Accessible outside class using methods (NOT directly through instance)
 
 ----------------------------------------------------
 Public member
@@ -122,10 +122,9 @@ Constructor
 ----------------------------------------------------
 Copy Constructor
 ----------------------------------------------------
-- When copy constructor is not defined
+- Why provide copy constructor? Otherwise:
     - Compiler will create reference instead of copying the instance
     - Any changes to first instance will reflect in copied instance
-- That is why copy constructor should be defined
 
 ----------------------------------------------------
 Desstructor (dtor)
@@ -325,8 +324,9 @@ void NS::Cls<T, N>::operator+=(const Cls &ins) {
 // Overloading (Functor)
 template <typename T, size_t N>
 void NS::Cls<T, N>::operator()() {
-    for_each(this->private_structure.vec.begin(), this->private_structure.vec.end(),
-             [](const T &element) { cout << element << endl; });
+  for (const auto &element : vec) {
+    cout << element << endl;
+  }
 }
 
 // Static method

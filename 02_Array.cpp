@@ -68,10 +68,10 @@ template <typename T>
 void my_func(T arr[]);
 
 template <typename T, size_t N>
-void my_func(array<T, N> arr);
+void my_func(array<T, N> &arr);
 
 template <typename T>
-void my_func(vector<T> vec);
+void my_func(vector<T> &vec);
 
 template <typename T>
 void my_func(T *ptr_arr);
@@ -210,16 +210,16 @@ void my_func(T arr[]) {
 }
 
 template <typename T, size_t N>
-void my_func(array<T, N> arr) {
+void my_func(array<T, N> &arr) {
     cout << arr.at(0) << endl;
 }
 
 template <typename T>
-void my_func(vector<T> vec) {
+void my_func(vector<T> &vec) {
     cout << vec.at(0) << endl;
 }
 
 template <typename T>
-void my_func2(T *ptr_arr) {
+void my_func(T *ptr_arr) {
     cout << ptr_arr[0] << endl;
 }
