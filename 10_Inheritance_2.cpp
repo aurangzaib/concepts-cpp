@@ -15,78 +15,102 @@
 #include <iostream>
 using namespace std;
 
-class Divider {
- public:
-  static void line() { cout << "-----------------------------" << endl; }
-  static void plus() { cout << "+++++++++++++++++++++++++++++" << endl; }
-};
-
 class Base {
- private:
-  int base_private;
+private:
+  int prop1;
+  int prop2;
 
- protected:
-  int base_protected;
+protected:
+  int prop3;
 
- public:
-  int base_public;
-  Base() : base_private(1), base_protected(2), base_public(3) {}
-  Base(const int &a, const int &b, const int &c): base_private(a), base_protected(b), base_public(c) {}
+public:
+  // ----------------------------------------------------
+  // Base Default Constructor
+  // ----------------------------------------------------
+  Base() : prop1(1), prop2(2), prop3(3) {}
+
+  // ----------------------------------------------------
+  // Base Parameterized Constructor
+  // ----------------------------------------------------
+  Base(const int &a, const int &b, const int &c) {
+    this->prop1 = a;
+    this->prop2 = b;
+    this->prop3 = c;
+  }
+
+  // ----------------------------------------------------
+  // Base Public Methods
+  // ----------------------------------------------------
   void getter() {
-    cout << this->base_private << endl;
-    cout << this->base_protected << endl;
-    cout << this->base_public << endl;
+    cout << "Base prop1: " << this->prop1 << endl;
+    cout << "Base prop2: " << this->prop2 << endl;
+    cout << "Base prop3: " << this->prop3 << endl;
   }
 };
 
 class Sub : public Base {
- private:
-  int sub_private;
-  Base base = Base(77, 88, 99);  // Composition
+private:
+  int prop1;
+  int prop2;
+  Base base;
 
- protected:
-  int sub_protected;
+protected:
+  int prop3;
 
- public:
-  Base base_public = Base(44, 55, 66);
-  int sub_public;
-  Sub(): Base(11, 22, 33), sub_private(97), sub_protected(98), sub_public(99) {}
+public:
+  // ----------------------------------------------------
+  // Sub Default Constructor
+  // ----------------------------------------------------
+  Sub() : Base(11, 12, 13), base(), prop1(14), prop2(15), prop3(16) {}
+
+  // ----------------------------------------------------
+  // Sub Parameterized Constructor
+  // ----------------------------------------------------
+  Sub(const int &a, const int &b, const int &c, const int &d, const int &e,
+      const int &f, const Base &g)
+      : Base(a, b, c), base(g) {
+    this->prop1 = d;
+    this->prop2 = e;
+    this->prop3 = f;
+  }
+
+  // ----------------------------------------------------
+  // Sub Public Methods
+  // ----------------------------------------------------
   void getter() {
-    // ----------------------------------------------------
-    // Base private properties using public function
-    // ----------------------------------------------------
-    Base::getter();
-    Divider::line();
-
-    // ----------------------------------------------------
-    // Base private properties using composition
-    // ----------------------------------------------------
+    cout << "Composition Properties: " << endl;
     this->base.getter();
-    cout << this->Sub::base_public.base_public << endl;
-    Divider::line();
-
-    // ----------------------------------------------------
-    // Base protected/public properties
-    // ----------------------------------------------------
-    cout << this->base_protected << endl;
-    cout << this->Base::base_public << endl;
-    Divider::line();
-
-    // ----------------------------------------------------
-    // Sub private/protected/public properties
-    // ----------------------------------------------------
-    cout << this->sub_private << endl;
-    cout << this->sub_protected << endl;
-    cout << this->sub_public << endl;
+    cout << "Sub properties: " << endl;
+    cout << "Sub prop1: " << this->prop1 << endl;
+    cout << "Sub prop2: " << this->prop2 << endl;
+    cout << "Sub prop3: " << this->prop3 << endl;
+  }
+  void getters() {
+    cout << "Base properties: " << endl;
+    Base::getter();
+    this->getter();
   }
 };
 
 int main() {
-  Sub ins;
-  ins.getter();
-  Divider::line();
   // ----------------------------------------------------
-  // Base private properties using sub instance
+  // Instance of base class
   // ----------------------------------------------------
-  ins.Base::getter();
-}   
+  Base instance_base(11, 12, 13);
+
+  // ----------------------------------------------------
+  // Instance of Sub class with inherited properties from Base class
+  // ----------------------------------------------------
+  Sub instance(21, 22, 23, 31, 32, 33, instance_base);
+
+  // ----------------------------------------------------
+  // Call Sub method using Sub instance
+  // ----------------------------------------------------
+  instance.getters();
+
+  // ----------------------------------------------------
+  // Call Base method using Sub instance
+  // ----------------------------------------------------
+  cout << "Base properties: " << endl;
+  instance.Base::getter();
+}
