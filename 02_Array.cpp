@@ -2,7 +2,7 @@
 
  Description:
  Array
- 
+
  Modifications:
  ---------------------------------------------------------------------------------------
  Date      Vers.  Comment                                                     Name
@@ -40,6 +40,7 @@ Array:
      - Same type elements
      - Random access using at()
      - Values stored contiginous
+     - Passed by value to a function
 Vector:
      - Recommended
      - Dynamic size
@@ -47,6 +48,7 @@ Vector:
      - Random access using at()
      - Values stored contiginous
      - Iterator invalid after changes in vector
+     - Passed by value to a function
 List:
      - Dynamic size
      - Same type elements
@@ -82,21 +84,21 @@ int main() {
     // Initialization
     // ==========================================================================================================
 
-    int arr_c[5]                    = {1, 2, 3, 4, 5};                  // C Array
-    int mat_c[2][3]                 = {{1, 2, 3}, {4, 5, 6}};           // C Matrix
-    array<int, 5> arr               = {1, 2, 3, 4, 5};                  // C++ Array
-    vector<int> vec                 = {1, 2, 3, 4, 5};                  // C++ Vector
-    list<int> lst                   = {1, 2, 3, 4, 5};                  // C++ List
-    tuple<int, float, string> tpl   = {1, 2.1, "3"};                    // C++ Tuple with explicit type
+    int arr_c[5] = {1, 2, 3, 4, 5};                 // C Array
+    int mat_c[2][3] = {{1, 2, 3}, {4, 5, 6}};       // C Matrix
+    array<int, 5> arr = {1, 2, 3, 4, 5};            // C++ Array
+    vector<int> vec = {1, 2, 3, 4, 5};              // C++ Vector
+    list<int> lst = {1, 2, 3, 4, 5};                // C++ List
+    tuple<int, float, string> tpl = {1, 2.1, "3"};  // C++ Tuple with explicit type
 
     // ==========================================================================================================
     // Alternate Initialization
     // ==========================================================================================================
-    int arr_c_alt[]                 = {1, 2, 3, 4, 5};                  // C Array
-    array arr_alt                   = {1, 2, 3, 4, 5};                  // C++ Array
-    vector vec_alt                  = {1, 2, 3, 4, 5};                  // C++ Vector
-    list lst_alt                    = {1, 2, 3, 4, 5};                  // C++ List
-    tuple tpl_alt                   = make_tuple(1, 2.1, "3");          // C++ Tuple with implicit type
+    int arr_c_alt[] = {1, 2, 3, 4, 5};        // C Array
+    array arr_alt = {1, 2, 3, 4, 5};          // C++ Array
+    vector vec_alt = {1, 2, 3, 4, 5};         // C++ Vector
+    list lst_alt = {1, 2, 3, 4, 5};           // C++ List
+    tuple tpl_alt = make_tuple(1, 2.1, "3");  // C++ Tuple with implicit type
 
     // ==========================================================================================================
     // Size
@@ -220,6 +222,6 @@ void my_func(vector<T> &vec) {
 }
 
 template <typename T>
-void my_func(T *ptr_arr) {
+void my_func(T *ptr_arr, const int a) {
     cout << ptr_arr[0] << endl;
 }

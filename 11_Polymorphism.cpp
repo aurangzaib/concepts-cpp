@@ -2,7 +2,7 @@
 
  Description:
  Polymorphism
- 
+
  Modifications:
  ---------------------------------------------------------------------------------------
  Date      Vers.  Comment                                                     Name
@@ -13,49 +13,86 @@
 
 */
 
-#include "09_Inheritance(Lib).cpp"
+// ==========================================================================================================
+// General
+// ==========================================================================================================
+/*
+
+----------------------------------------------------
+Polymorphism
+----------------------------------------------------
+- To use base method with sub property using base pointer
+- Also called late binding
+
+----------------------------------------------------
+Virtual Function
+----------------------------------------------------
+- To use sub method with sub property using base pointer
+- Define virtual function in base class
+- Base class becomes abstract class
+
+----------------------------------------------------
+Note:
+----------------------------------------------------
+- Polymorphism = Run time polymorphism
+- Overloading  = Compile time polymorphism
+
+*/
 
 // ==========================================================================================================
 // Link
 // ==========================================================================================================
 // - https://www.geeksforgeeks.org/cpp-polymorphism
 
-// ==========================================================================================================
-// General
-// ==========================================================================================================
-/*
-----------------------------------------------------
-Compile Time Polymorphism
-----------------------------------------------------
-- Function overloading
-- Operator overloading
+#include <iostream>
+using namespace std;
 
-----------------------------------------------------
-Run Time Polymorphism
-----------------------------------------------------
-- Achieved using pointer and virtual function
-- Also called Late Binding
-- Function overriding
+class Base {
+   private:
+    int prop = 0;
 
-----------------------------------------------------
-Note
-----------------------------------------------------
-- Base pointer can point to any of the child class instance
-- Base pointer can point to child class methods only which are defined in base class also.
-- Thats why we create virtual members in base class and define actual implementations in derived classes.
+   public:
+    Base(const int a) : prop(a) {}
 
-*/
+    void getter() {
+        cout << "Base function: ";
+        cout << prop << endl;
+    }
+
+    virtual void print() = 0;
+};
+
+class Sub : public Base {
+   private:
+    int prop;
+
+   public:
+    Sub(const int a, const int b) : Base(a), prop(b) {}
+    void getter() {
+        cout << "Sub function: ";
+        cout << prop << endl;
+    }
+
+    void print() {
+        getter();
+    }
+};
 
 int main() {
-    BaseClass* base_instance;          // Pointer of Base class
-    SubClass1<double> sub_instance1;   // Instance of Child class
-    SubClass2<double> sub_instance2;   // Instance of Child class
+    Base *base_ptr;
+    Sub sub(1,   // value for inherited property
+            2);  // value for own property
 
-    base_instance = &sub_instance1;                       // Polymorphism: base_instance pointer to sub_instance1
-    sub_instance1.print(base_instance->get_child_key());  // Note: print is accessed through sub_instance1
-    cout << base_instance->get_child() << endl;
+    // ----------------------------------------------------
+    // With polymorphism
+    // ----------------------------------------------------
+    base_ptr = &sub;
+    base_ptr->getter();  // Base method with Sub property
+    base_ptr->print();   // Sub method with Sub property
 
-    base_instance = &sub_instance2;                       // Polymorphism: base_instance pointer to sub_instance2
-    sub_instance2.print(base_instance->get_child_key());  // Note: print is accessed through sub_instance2
-    cout << base_instance->get_child() << endl;
+    // ----------------------------------------------------
+    // Without polymorphism (same results)
+    // ----------------------------------------------------
+    sub.Base::getter();  // Base method with Sub property
+    sub.getter();        // Sub method with Sub property
 }

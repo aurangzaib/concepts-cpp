@@ -2,7 +2,7 @@
 
  Description:
  Function
- 
+
  Modifications:
  ---------------------------------------------------------------------------------------
  Date      Vers.  Comment                                                     Name
@@ -28,11 +28,11 @@ using namespace std;
 - Multiple functions for multiple param types can be implemented using overloading
 - One function for multiple param types can be implemented using template
 - Function is not first class citizen (can't be passed, can't be returned)
-- Python: Function overloading not available due to dynamic types
-- Lambdas are first class citizen
+- Lambda is first class citizen
 - Syntax of a function
      const int function(const int& a) const{}
-     |__ return type         |__ params    |__function can't be changed
+     |__ return          |__ params    |__function can't be changed
+- Python: No overloading possible due to dynamic types
 */
 
 // ==========================================================================================================
@@ -71,8 +71,8 @@ const auto my_function4(const int &a, const int &b) {
 // ==========================================================================================================
 // Inline function
 // ==========================================================================================================
-// To avoid function call overhead
 // Compiler expands (instead of invoke) the function where it is called
+// To avoid function call overhead
 inline auto my_function5(const int &a, const int &b) {
     return a + b;
 }
@@ -126,16 +126,18 @@ long factorial_with_recursion(const long &num) {
 // ==========================================================================================================
 // Lambda Expression
 // ==========================================================================================================
-// - Inline functions which can be passed as a parameter (unlike function) for callback etc
-// - Lamda Expression uses trailing return type
+// - Lambda can be passed as a parameter (unlike function)
+// - Lamda uses trailing return type
+//
 // - Variable capture modes:
 //     [&]          All variables by reference
 //     [=]          All variables by value
 //     [v1, &v2]    v1 by value, v2 by reference
+//
 // - Syntax:
-//     Function: void abc(){}
+//     Function: auto abc   ()->void{}
 //     Lambda:   auto abc=[]()->void{}
-void lamda_tester() {
+auto lamda_tester() -> void {
     int num1 = 33;
     int num2 = 55;
     // Inline Lamda expression with trailing return type
@@ -146,17 +148,7 @@ void lamda_tester() {
         return param;
     };
     cout << lamda_exp(num2) << endl;
-}
-
-// ==========================================================================================================
-// Variadic Template
-// ==========================================================================================================
-// A function which takes N arguments
-template <typename... T>
-void printer(T... params) {
-    // Number of parameters
-    cout << sizeof...(params) << endl;
-}
+};
 
 // ==========================================================================================================
 // Partial Function
@@ -185,7 +177,5 @@ int main() {
     // Partial function
     func("Siddiqui", "Rosenheim", 30, 5.9);
     partial_func("Siddiqui", 5.9);
-    // Variadic template
-    printer(1, 2, 3);
     return 0;
 }

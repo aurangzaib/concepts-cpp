@@ -2,7 +2,7 @@
 
  Description:
  Basic
- 
+
  Modifications:
  ---------------------------------------------------------------------------------------
  Date      Vers.  Comment                                                     Name
@@ -25,8 +25,8 @@
 // Fonts
 // ==========================================================================================================
 
-// Courier New
 // Source Code Pro
+// Courier New
 // Fira Code
 
 // ==========================================================================================================
@@ -126,8 +126,8 @@ int main() {
     //    - Preferred over Enums
     //    - With scope
     //    - Explicit cast
-    
-    enum Companies1       { BMW = 99, Mercedes, Porsche, Audi, VW };
+
+    enum Companies1 { BMW = 99, Mercedes, Porsche, Audi, VW };
     enum class Companies2 { BMW = 99, Mercedes, Porsche, Audi, VW };
 
     std::cout << Mercedes << std::endl;

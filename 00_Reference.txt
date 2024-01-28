@@ -7,3 +7,41 @@ Learning Resources
 - https://cplusplus.com/doc/tutorial
 - https://learn.microsoft.com/en-us/cpp/cpp/user-defined-literals-cpp
 - https://lefticus.gitbooks.io/cpp-best-practices
+
+=============================================================================================================
+Setup VSCode for C++
+=============================================================================================================
+
+https://github.com/microsoft/vscode-cpptools/issues/11316#issuecomment-1677796258
+
+=============================================================================================================
+Jupyter Notebook for C++
+=============================================================================================================
+
+https://blog.jupyter.org/interactive-workflows-for-c-with-jupyter-fe9b54227d92
+
+=============================================================================================================
+Conda for C++
+=============================================================================================================
+
+https://wolfv.github.io/posts/2019/06/12/conda-for-cpp.html
+https://code.visualstudio.com/docs/cpp/cmake-linux
+
+
+=============================================================================================================
+VSCode Task vs CMake
+=============================================================================================================
+
+--------------------------------------------
+VSCode Task (tasks.json)
+--------------------------------------------
+- Used to run individual files
+- Useful when learning
+- In Debug Console, add these filter:
+    !Loaded, !Warning, !The Program, !=
+
+--------------------------------------------
+CMake
+--------------------------------------------
+- Used to run projects with single entry point
+- https://xtensor.readthedocs.io/en/latest/installation.html
