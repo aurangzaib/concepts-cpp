@@ -2,7 +2,7 @@
 
  Description:
  Inheritance Declaration
- 
+
  Modifications:
  ---------------------------------------------------------------------------------------
  Date      Vers.  Comment                                                     Name
@@ -17,30 +17,6 @@
 #include <vector>
 
 using namespace std;
-
-// ==========================================================================================================
-// General
-// ==========================================================================================================
-/*
-- Access levels      Public  Protected   Private
-- Same class         yes     yes         yes
-- Inherit class      yes     yes
-- Non members        yes
-
-- Inheritance:
-    Private:   Public becomes private
-    Protected: Public becomes protected
-    Public:    Public becomes public
-
-- In most use cases, derived class inherits base as public
-
-- Public inheritance inherits all base parts except:
-    ctor and dtor
-    = operator
-    friends
-    private
-
-*/
 
 // ==========================================================================================================
 // Base Class Declaration

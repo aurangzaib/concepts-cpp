@@ -2,7 +2,7 @@
 
  Description:
  Template
- 
+
  Modifications:
  ---------------------------------------------------------------------------------------
  Date      Vers.  Comment                                                     Name
@@ -27,10 +27,9 @@ using namespace std;
 // Notes
 // ==========================================================================================================
 /*
-- To define a function/class for a generic type where type can be inferred later on usage
+- Template is used to define a function/class where type is inferred on invocation
 - Type as well as value can be templatized     (<typename T, size_t N>)
 - typename or class for template type are same (<typename T, class U>)
-- Variadic template is a function which takes N parameters
 */
 
 // ==========================================================================================================
@@ -45,6 +44,26 @@ auto multiplier(const T &a, const U &b) {
 template <typename T, size_t N>
 array<T, N> arr = {1.1, 2.2, 3.3};
 
+// ==========================================================================================================
+// Variadic Template
+// ==========================================================================================================
+// A function which takes N arguments
+template <typename... T>
+void variadic_function(T... params) {
+    // Number of parameters
+    cout << sizeof...(params) << endl;
+    // Unpack the parameters
+    for (const auto &elem : {params...}) {
+        cout << elem << endl;
+    }
+}
+auto variadic_tester = []() -> void { variadic_function(1, 2, 3); };
+
+// ==========================================================================================================
+// Template Specialization
+// ==========================================================================================================
+// https://en.cppreference.com/w/cpp/language/template_specialization
+
 //----------------------------------------------------------------
 int main() {
     auto result_int = multiplier(2, 3);
@@ -56,11 +75,7 @@ int main() {
     for (const auto &value : arr<double, 3>) {
         cout << value << endl;
     }
-
+    // Variadic template
+    variadic_tester();
     return 0;
 }
-
-// ==========================================================================================================
-// Template Specialization
-// ==========================================================================================================
-// https://en.cppreference.com/w/cpp/language/template_specialization

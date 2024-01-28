@@ -2,7 +2,7 @@
 
  Description:
  Class
- 
+
  Modifications:
  ---------------------------------------------------------------------------------------
  Date      Vers.  Comment                                                     Name
@@ -84,6 +84,15 @@ Static members
 - Accesible inside/outside using class and instance
 - Shared by all instances (once per class)
 - Initialized outside of class definition
+- Must be defined as public member
+
+----------------------------------------------------
+Method access outside class
+----------------------------------------------------
+- Standard:                    Cls::method
+- With template:               Cls<T>::method
+- With namespace:              NS::Cls::method
+- With namespace and template: NS::Cls<T>::method
 
 ----------------------------------------------------
 Friend members
@@ -97,12 +106,12 @@ Friend members
 Scope resolution operator (::)
 ----------------------------------------------------
 - To access class methods outside declaration
-- To access static properties
+- To access class static properties
 
 ----------------------------------------------------
-this->
+this
 ----------------------------------------------------
-- To access class properties
+- To access instance properties inside methods
 - To chain methods (return *this)
 
 ----------------------------------------------------
@@ -123,8 +132,8 @@ Constructor
 Copy Constructor
 ----------------------------------------------------
 - Why provide copy constructor? Otherwise:
-    - Compiler will create reference instead of copying the instance
-    - Any changes to first instance will reflect in copied instance
+- Compiler will create reference instead of copying the instance
+- Any changes to first instance will reflect in copied instance
 
 ----------------------------------------------------
 Desstructor (dtor)
@@ -172,7 +181,7 @@ struct Structure {
     array<T, N> arr;
     vector<T> vec;
     string str;
-};  // End of structure
+};
 
 // ==========================================================================================================
 // Class Declaration
@@ -201,7 +210,7 @@ class Cls {
     Cls operator+(const Cls &);                                                // Overloading
     void operator=(const Cls &);                                               // Overloading
     void operator+=(const Cls &);                                              // Overloading
-    void operator()();                                                         // Overloading (Functor)
+    void operator()();                                                         // Functor
     static void func_static();                                                 // Static Method
     friend Cls set_vector(Cls &ins, const vector<T> vec) {                     // Friend Method (definition)
         ins.private_structure.vec = vec;
@@ -321,12 +330,12 @@ void NS::Cls<T, N>::operator+=(const Cls &ins) {
     this->private_structure.str += ins.private_structure.str;
 }
 
-// Overloading (Functor)
+// Functor
 template <typename T, size_t N>
 void NS::Cls<T, N>::operator()() {
-  for (const auto &element : vec) {
-    cout << element << endl;
-  }
+    for (const auto &element : this->private_structure.vec) {
+        cout << element << endl;
+    }
 }
 
 // Static method
@@ -344,10 +353,10 @@ void NS::Test() {
     const int size = 3;
 
     // Instantiation
-    NS::Cls<int, size> ins1;        // Default constructor
-    NS::Cls<int, size> ins2(ins1);  // Copy constructor
-    NS::Cls<int, size> ins3(33, array<int, 3>{1, 2, 3}, vector<int>{4, 5, 6}, string{"Hello World"});  // Constructor
-    NS::Cls<int, size> ins4(33, array{1, 2, 3}, vector{4, 5, 6}, "Hello World");                       // Constructor
+    NS::Cls<int, size> ins1;                                                                           // Default ctor
+    NS::Cls<int, size> ins2(ins1);                                                                     // Copy ctor
+    NS::Cls<int, size> ins3(33, array<int, 3>{1, 2, 3}, vector<int>{4, 5, 6}, string{"Hello World"});  // Param ctor
+    NS::Cls<int, size> ins4(33, array{1, 2, 3}, vector{4, 5, 6}, "Hello World");                       // Param ctor
 
     // Getter Setter
     vector<int> vec1 = ins1.get_vector();
@@ -356,9 +365,9 @@ void NS::Test() {
     vector<int> vec3 = ins1.get_vector();
 
     // Overloading
-    NS::Cls<int, size> ins5 = ins1 + ins3;  // + overloaded
-    ins1 = ins3;                            // = overloaded
-    ins1 += ins3;                           // += overloaded
+    NS::Cls<int, size> ins5 = ins1 + ins3;  // + operator
+    ins1 = ins3;                            // = operator
+    ins1 += ins3;                           // += operator
 
     // Method chaining
     ins1.set_string("Hello").get_string();
@@ -368,10 +377,10 @@ void NS::Test() {
     vector<int> vec5 = ins3.get_vector();
 
     // Function and functor
-    ins3.set_vector((vector<int>){-97, -98, -99})();
+    ins3.set_vector(vector<int>{-97, -98, -99})();
 
     // Friend function and functor
-    set_vector(ins1, vector<int>{-1, -2, -3})();
+    set_vector(ins3, vector<int>{-1, -2, -3})();
 
     // Static property
     NS::Cls<int, size>::num_static = 998;

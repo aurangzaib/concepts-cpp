@@ -2,7 +2,7 @@
 
  Description:
  Inheritance Definition
- 
+
  Modifications:
  ---------------------------------------------------------------------------------------
  Date      Vers.  Comment                                                     Name
@@ -13,7 +13,7 @@
 
 */
 
-#include "09_Inheritance(Lib).hpp"
+#include "10_Inheritance(ExtraLib).hpp"
 
 using namespace std;
 
