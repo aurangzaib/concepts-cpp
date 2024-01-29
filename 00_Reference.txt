@@ -45,3 +45,17 @@ CMake
 --------------------------------------------
 - Used to run projects with single entry point
 - https://xtensor.readthedocs.io/en/latest/installation.html
+
+=============================================================================================================
+VSCode C++ Formatting
+=============================================================================================================
+
+{
+    BasedOnStyle: Google, 
+    IndentWidth: 4, 
+    TabWidth: 4, 
+    UseTab: Never, 
+    AllowShortIfStatementsOnASingleLine: true, 
+    AllowShortFunctionsOnASingleLine: false, 
+    ColumnLimit: 120
+}
