@@ -21,7 +21,7 @@
 ----------------------------------------------------
 Polymorphism
 ----------------------------------------------------
-- To use base method with sub property using base pointer
+- Base method called with sub property
 - Also called late binding
 
 ----------------------------------------------------

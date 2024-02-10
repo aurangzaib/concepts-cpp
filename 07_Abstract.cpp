@@ -43,9 +43,15 @@ class AbstractClass {
     vector<int> properties;
 
    public:
-    AbstractClass() : properties(vector<int>{1, 2, 3}) {}                     // Default constructor
-    AbstractClass(const AbstractClass &ins) : properties(ins.properties) {}   // Copy constructor
-    AbstractClass(const vector<int> &properties) : properties(properties) {}  // Param constructor
+    // Default constructor
+    AbstractClass() : properties(vector<int>{1, 2, 3}) {
+    }
+    // Copy constructor
+    AbstractClass(const AbstractClass &ins) : properties(ins.properties) {
+    }
+    // Param constructor
+    AbstractClass(const vector<int> &properties) : properties(properties) {
+    }
     // Member Function
     const vector<int> getter() {
         return this->properties;

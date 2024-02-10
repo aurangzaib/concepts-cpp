@@ -197,7 +197,7 @@ int main() {
     vec.clear();
 
     // Check if all empty
-    vec.empty();
+    cout << vec.empty();
 
     return 0;
 }

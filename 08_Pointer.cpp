@@ -151,8 +151,8 @@ int main() {
     // ------------------------------------------------------------------------------
     // | Valid pointer    | Pointer with a type. It points to a variable            |
     // | Dangling pointer | Pointer with a type. The pointed memory gets freed      |
+    // | Wild pointer     | Pointer with a type. It points to random memory address |
     // | Void pointer     | Pointer with void type. It points to nothing            |
     // | Null pointer     | Pointer with a type. It points to NULL                  |
-    // | Wild pointer     | Pointer with a type. It points to random memory address |
     // ------------------------------------------------------------------------------
 }
