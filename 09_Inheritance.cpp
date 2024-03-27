@@ -74,7 +74,7 @@ class Base {
     }
 };
 
-class Sub : public Base {
+class Sub : public Base {  // Inheritance
    private:
     int prop1;
     Base base;  // Composition
@@ -126,7 +126,7 @@ int main() {
     Base instance_base(11, 12);
 
     // ----------------------------------------------------
-    // Instance of Sub class (composition + inheritance)
+    // Instance of Sub class (inheritance + dependency injection)
     // ----------------------------------------------------
     Sub instance(21, 22, 31, 32, instance_base);
 

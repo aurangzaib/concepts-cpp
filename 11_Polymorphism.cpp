@@ -52,7 +52,8 @@ class Base {
     int prop = 0;
 
    public:
-    Base(const int a) : prop(a) {}
+    Base(const int a) : prop(a) {
+    }
 
     void getter() {
         cout << "Base function: ";
@@ -67,7 +68,8 @@ class Sub : public Base {
     int prop;
 
    public:
-    Sub(const int a, const int b) : Base(a), prop(b) {}
+    Sub(const int a, const int b) : Base(a), prop(b) {
+    }
     void getter() {
         cout << "Sub function: ";
         cout << prop << endl;

@@ -83,13 +83,13 @@ int main() {
     // ==========================================================================================================
     // Initialization
     // ==========================================================================================================
-
-    int arr_c[5] = {1, 2, 3, 4, 5};                 // C Array
-    int mat_c[2][3] = {{1, 2, 3}, {4, 5, 6}};       // C Matrix
-    array<int, 5> arr = {1, 2, 3, 4, 5};            // C++ Array
-    vector<int> vec = {1, 2, 3, 4, 5};              // C++ Vector
-    list<int> lst = {1, 2, 3, 4, 5};                // C++ List
-    tuple<int, float, string> tpl = {1, 2.1, "3"};  // C++ Tuple with explicit type
+    int arr_c[5] = {1, 2, 3, 4, 5};                                // C Array
+    int mat_c[2][3] = {{1, 2, 3}, {4, 5, 6}};                      // C Matrix
+    array<int, 5> arr = {1, 2, 3, 4, 5};                           // C++ Array
+    vector<int> vec = {1, 2, 3, 4, 5};                             // C++ Vector
+    list<int> lst = {1, 2, 3, 4, 5};                               // C++ List
+    tuple<int, float, string> tpl = {1, 2.1, "3"};                 // C++ Tuple with explicit type
+    vector<vector<int>> mat1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};  // C++ Vector Matrix
 
     // ==========================================================================================================
     // Alternate Initialization
@@ -120,17 +120,20 @@ int main() {
     vec.front();
     lst.front();
     get<0>(tpl);
+    mat1.front().front();
 
     // Access last element
     arr_c[sizeof(arr_c) / sizeof(arr_c[0]) - 1];
     arr.back();
     vec.back();
     lst.back();
+    mat1.back().back();
 
     // Access nth element
     arr_c[2];
     arr.at(2);
     vec.at(2);
+    mat1.at(2).at(0);
 
     // ==========================================================================================================
     // Read Address
