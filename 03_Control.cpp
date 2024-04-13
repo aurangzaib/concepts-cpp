@@ -24,7 +24,7 @@ int main() {
     // Notes
     // ==========================================================================================================
     // - continue:    Skip current iteration
-    // - break:       Skip all iterations (exit the loop)
+    // - break:       Exit current loop
 
     int max_count = 10;
     vector vec = {1, 2, 3};

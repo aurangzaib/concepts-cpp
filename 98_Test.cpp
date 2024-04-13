@@ -5,40 +5,37 @@
 #include <array>
 
 using namespace std;
-
 class Base {
    private:
     int a = 0;
 
    public:
-    void getter() {
-        cout << a << endl;
+    Base() : a(1) {
     }
-    virtual void print() = 0;
-};
-class Sub : public Base {
-   private:
-    int a = 1;
-
-   public:
-    void getter() {
-        cout << a << endl;
+    Base(int a) : a(a) {
     }
     void print() {
-        getter();
+        cout << "base method" << endl;
+        cout << this->a << endl;
+    }
+};
+
+class Sub : public Base {
+   private:
+    int a = 0;
+
+   public:
+    Sub(int a) : a(a) {
+    }
+    void print() {
+        cout << "sub method" << endl;
+        cout << this->a << endl;
     }
 };
 
 int main() {
-    Base *ptr_base;
-    Sub sub;
+    Base *ptr;
+    Sub ins(11);
 
-    // With polymorphism
-    ptr_base = &sub;
-    ptr_base->getter();
-    ptr_base->print();
-
-    // Without polymorphsm
-    sub.Base::getter();
-    sub.getter();
+    ins.
 }

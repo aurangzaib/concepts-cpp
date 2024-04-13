@@ -38,7 +38,6 @@
 // Static storage:      Global variables (default initialized to 0)
 // Automatic storage:   Local variables  (default initialized to random value)
 // C++ namespace:       Python module file
-// Debugger Filters:    !Loaded, !=thread, !0x00000000, !x86_64
 
 // ==========================================================================================================
 // Initialization
@@ -61,7 +60,7 @@ int c0{3};   // Uniform initialization
 // double       8 byte
 // long double  8 byte
 // long long    8 byte
-// auto         Only on declaration. Not for function param / return type
+// auto         Only on declaration. Not for function param / return type (except trailing return type)
 
 // ==========================================================================================================
 // Abbreviatins

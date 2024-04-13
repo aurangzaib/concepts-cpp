@@ -1,7 +1,7 @@
 /*
 
  Description:
- Inheritance (Core)
+ Inheritance
 
  Modifications:
  ---------------------------------------------------------------------------------------
@@ -41,6 +41,7 @@ using namespace std;
     friends
     private
 
+- Note: C++ uses classname unlike super() in Python
 */
 
 class Base {
@@ -94,9 +95,9 @@ class Sub : public Base {  // Inheritance
     // ----------------------------------------------------
     Sub(const int &a, const int &b, const int &c, const int &d, const Base &e)
         : Base(a, b),  // Inhertiance
-          base(e) {    // Composition
-        this->prop1 = c;
-        this->prop2 = d;
+          base(e),     // Composition (Dependency Injection)
+          prop1(c),    // Own property
+          prop2(d) {
     }
 
     // ----------------------------------------------------

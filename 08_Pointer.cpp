@@ -32,8 +32,8 @@ using namespace std;
 // - Pointer can be used to pass func as a param
 // - & is reference operator   (address)
 // - * is dereference operator (value)
-// - There is no difference between C-Array and Pointer when accessing value or address
-//   Pointer can point to new variable, C-array can't
+// - No difference between C-Array and Pointer when accessing value or address
+// - Pointer can point to new variable, C-array can't
 // - Difference between pointer-to-variable and pointer-to-class:
 //   -- Access variable value:       *ptr
 //   -- Access class property value : ptr->property
@@ -147,12 +147,12 @@ int main() {
     // ==========================================================================================================
     // Summary of pointer types
     // ==========================================================================================================
-    // | Type of pointer  | Description                                             |
-    // ------------------------------------------------------------------------------
-    // | Valid pointer    | Pointer with a type. It points to a variable            |
-    // | Dangling pointer | Pointer with a type. The pointed memory gets freed      |
-    // | Wild pointer     | Pointer with a type. It points to random memory address |
-    // | Void pointer     | Pointer with void type. It points to nothing            |
-    // | Null pointer     | Pointer with a type. It points to NULL                  |
-    // ------------------------------------------------------------------------------
+    // | Type of pointer  | Description                                        |
+    // -------------------------------------------------------------------------
+    // | Valid pointer    | Valid type     Valid address      Valid value      |
+    // | Dangling pointer | Valid type     Valid address      Random value     |
+    // | Wild pointer     | Valid type     Random address     Random value     |
+    // | Void pointer     | Void type      No address         No value         |
+    // | Null pointer     | valid type     No address         NULL value       |
+    // -------------------------------------------------------------------------
 }
