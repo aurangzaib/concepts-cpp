@@ -100,8 +100,10 @@ auto my_function(void) -> int {
 // Factorial without recursion:
 // n! = n*(n-1)*(n-2)*(n-3)...*(n-n+2)*(n-n+1)
 long factorial_without_recursion(long num) {
-    if (num < 0) return NULL;  // Handle negative numbers
-    if (num <= 1) return 1;    // Handle <=1 numbers (0, 1)
+    if (num < 0)
+        return NULL;  // Handle negative numbers
+    if (num <= 1)
+        return 1;  // Handle <=1 numbers (0, 1)
     for (auto loop = num - 1; loop > 1; loop -= 1) {
         num *= loop;
     }
@@ -114,8 +116,10 @@ long factorial_without_recursion(long num) {
 // factorial(num) = num * factorial(num - 1)
 // Why 0! = 1? Because 0 can be arranged only 1 way
 long factorial_with_recursion(const long &num) {
-    if (num < 0) return NULL;                        // Handle negative numbers
-    if (num <= 1) return 1;                          // Handle <=1 numbers (0, 1)
+    if (num < 0)
+        return NULL;  // Handle negative numbers
+    if (num <= 1)
+        return 1;                                    // Handle <=1 numbers (0, 1)
     return num * factorial_with_recursion(num - 1);  // Handle > 1 numbers (2,..)
 }
 
