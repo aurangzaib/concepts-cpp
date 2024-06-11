@@ -140,14 +140,14 @@ long factorial_with_recursion(const long &num) {
 auto lamda_tester() -> void {
     int num1 = 33;
     int num2 = 55;
-    // Inline Lamda expression with trailing return type
-    auto lamda_exp = [&num1](const int &param) -> int {
+    // Inline Lambda expression with trailing return type
+    auto lambda_exp = [&num1](const int &param) -> int {
         if (num1 > param) {
             return num1;
         }
         return param;
     };
-    cout << lamda_exp(num2) << endl;
+    cout << lambda_exp(num2) << endl;
 };
 
 // ==========================================================================================================

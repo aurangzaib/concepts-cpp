@@ -89,10 +89,11 @@ Static members
 ----------------------------------------------------
 Method access outside class
 ----------------------------------------------------
-- Standard:                    Cls::method
-- With template:               Cls<T>::method
-- With namespace:              NS::Cls::method
-- With namespace and template: NS::Cls<T>::method
+- Standard:                                 Cls::method
+- With template:                            Cls<T>::method
+- With namespace:                           NS::Cls::method
+- With namespace and template:              NS::Cls<T>::method
+- With namespace and template with return:  NS::Cls<T> NS::Cls<T>::method
 
 ----------------------------------------------------
 Friend members
@@ -162,7 +163,7 @@ Encapsulation and Abstraction
 - Data Binding:        Bind data and functions using class
 
 */
-    
+
 using namespace std;
 
 // ==========================================================================================================
